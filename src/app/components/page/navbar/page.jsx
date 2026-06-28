@@ -73,12 +73,13 @@ export default function Navbar() {
                             </li>
                         ))}
                         <li>
-                            <button
-                                onClick={() => window.location.href('../../../login')}
-                                className="block px-3 py-2 rounded-lg bg-blue-600 text-white font-semibold mt-1 text-center"
+                            <a
+                                href="/login"
+                                onClick={closeMenu}
+                                className=" items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2 rounded-lg shadow-sm transition-colors"
                             >
                                 Login
-                            </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
