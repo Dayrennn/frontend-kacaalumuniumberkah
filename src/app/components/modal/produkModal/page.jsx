@@ -1,5 +1,7 @@
 'use client';
 
+import Image from "next/image";
+
 export default function ProdukModal({ product, onClose }) {
     if (!product) return null;
 
@@ -17,7 +19,7 @@ export default function ProdukModal({ product, onClose }) {
                     className="relative h-32 flex items-center justify-center"
                     style={product.bg ? { background: product.bg } : { background: '#dbeafe' }}
                 >
-                    <i className={`fa-solid ${product.icon} ${product.iconColor} text-6xl`}></i>
+                    <Image src={product.image} alt={product.name} width={120} height={120} />
 
                     <button
                         onClick={onClose}

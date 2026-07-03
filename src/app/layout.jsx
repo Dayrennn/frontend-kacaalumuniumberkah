@@ -1,4 +1,5 @@
 import { Geist, Geist_Mono, Poppins } from 'next/font/google';
+import Providers from './providers';
 import './globals.css';
 
 const geistSans = Geist({
@@ -86,7 +87,9 @@ export default function RootLayout({ children }) {
                     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 />
             </head>
-            <body className="min-h-full flex flex-col">{children}</body>
+            <body className="min-h-full flex flex-col">
+                <Providers>{children}</Providers>
+            </body>
         </html>
     );
 }

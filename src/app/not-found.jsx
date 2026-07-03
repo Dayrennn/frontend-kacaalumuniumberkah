@@ -1,6 +1,6 @@
-'use client'
+import Link from "next/link";
 
-export default function UnderDevelopmentPage() {
+export default function NotFound() {
     return (
         <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 px-6">
             <div className="max-w-lg text-center">
@@ -35,19 +35,12 @@ export default function UnderDevelopmentPage() {
                 </p>
 
                 <div className="mt-10 flex justify-center gap-4">
-                    <button
-                        onClick={() => history.back()}
-                        className="rounded-xl border border-slate-700 px-5 py-3 text-sm font-medium text-white transition hover:bg-slate-800"
-                    >
-                        Kembali
-                    </button>
-
-                    <button
-                        onClick={() => (window.location.href = '/')}
+                    <Link
+                        href="/"
                         className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
                     >
                         Home
-                    </button>
+                    </Link>
                 </div>
             </div>
         </main>
