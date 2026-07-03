@@ -25,14 +25,9 @@ export default function FormLogin() {
         try {
             const result = await login({ username, password }).unwrap();
             const user = result.data;
-
-            localStorage.setItem('token', user.token);
-            localStorage.setItem('user', JSON.stringify(user));
-
             dispatch(
                 setCredentials({
                     user,
-                    token: user.token,
                 }),
             );
 

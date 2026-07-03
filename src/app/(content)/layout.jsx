@@ -5,8 +5,6 @@ import { useSelector } from 'react-redux';
 import { Menu } from 'lucide-react';
 import Sidebar from '../components/sidebar/page';
 import { selectUser } from '@/hooks/api/authSliceAPI';
-// TODO: kalau Plavon punya useLogoutMutation kayak di project sekolah, panggil di sini
-// import { useLogoutMutation } from '@/hooks/api/userSliceAPI';
 
 export default function DashboardLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -17,12 +15,7 @@ export default function DashboardLayout({ children }) {
 
     return (
         <div className="min-h-screen bg-gray-50">
-            <Sidebar
-                open={sidebarOpen}
-                onClose={() => setSidebarOpen(false)}
-                isAdmin={isAdmin}
-                isOwner={isOwner}
-            />
+            <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} isAdmin={isAdmin} isOwner={isOwner} />
 
             {/* pl-64 harus sama dengan lebar sidebar (w-64) */}
             <div className="lg:pl-64">

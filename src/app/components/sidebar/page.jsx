@@ -49,8 +49,6 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
         } catch (error) {
             console.error('logout gagal', error);
         } finally {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
             dispatch(logoutAction());
             router.push('/login');
         }
