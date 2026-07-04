@@ -79,7 +79,7 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                     </SidebarLink>
 
                     <SidebarGroup icon={Package} label="Master Data" basePath="/master-data">
-                        <SidebarSubLink href="/master-data/barang" icon={Package}>
+                        <SidebarSubLink href="/master-data/data-barang" icon={Package}>
                             Barang
                         </SidebarSubLink>
                         <SidebarSubLink href="/master-data/kategori" icon={Tag}>

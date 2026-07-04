@@ -38,10 +38,11 @@ export default function Address() {
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Whatsapp / Telephone</p>
                                 <a
-                                    href="tel:+62811234567"
+                                    href="https://wa.me/6282310134497"
+                                    target="_blank"
                                     className="text-blue-600 text-sm font-medium hover:underline"
                                 >
-                                    +62 811-2345-6789
+                                    +62 82310134497
                                 </a>
                             </div>
                         </div>
@@ -52,10 +53,10 @@ export default function Address() {
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Email</p>
                                 <a
-                                    href="mailto:info@buildpro.id"
+                                    href="mailto:bkh.pvc@gmail.com"
                                     className="text-blue-600 text-sm font-medium hover:underline"
                                 >
-                                    info@berkahkacaalumunium.com
+                                    bkh.pvc@gmail.com
                                 </a>
                             </div>
                         </div>
@@ -67,29 +68,27 @@ export default function Address() {
                                 <p className="font-semibold text-gray-800 text-sm mb-1">Jadwal</p>
                                 <div className="text-gray-500 text-sm space-y-0.5">
                                     <p>
-                                        Senin – Jumat: <span className="font-medium text-gray-700">07:30 – 17:00</span>
-                                    </p>
-                                    <p>
-                                        Sabtu – Minggu: <span className="font-medium text-gray-700">08:00 – 15:00</span>
+                                        Senin – Minggu: <span className="font-medium text-gray-700">08:00 – 17:00</span>
                                     </p>
                                 </div>
                             </div>
                         </div>
                         <div className="pt-4 border-t border-gray-100 flex gap-3">
-                            {[
-                                ['fa-instagram', 'Instagram'],
-                                ['fa-whatsapp', 'WhatsApp'],
-                                ['fa-facebook-f', 'Facebook'],
-                            ].map(([icon, label]) => (
-                                <a
-                                    key={label}
-                                    href="#"
-                                    className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
-                                    aria-label={label}
-                                >
-                                    <i className={`fa-brands ${icon} text-sm`}></i>
-                                </a>
-                            ))}
+                            <a
+                                href="https://wa.me/6282310134497"
+                                target="_blank"
+                                className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
+                                aria-label="WhatsApp"
+                            >
+                                <i className="fa-brands fa-whatsapp text-sm"></i>
+                            </a>
+                            <a
+                                href="#"
+                                className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
+                                aria-label="Facebook"
+                            >
+                                <i className="fa-brands fa-facebook-f text-sm"></i>
+                            </a>
                         </div>
                     </div>
 
