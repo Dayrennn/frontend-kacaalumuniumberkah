@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function BannerCTA() {
     return (
@@ -35,7 +35,8 @@ export default function BannerCTA() {
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <a
-                                href="https://wa.me/628112345678"
+                                href="https://wa.me/6282310134497"
+                                target="_blank"
                                 className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm sm:text-base"
                             >
                                 <i className="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat via WhatsApp
