@@ -13,7 +13,6 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
     const [ukuran, setUkuran] = useState('');
     const [kategoriId, setKategoriId] = useState(null);
     const [status, setStatus] = useState('Aktif');
-    const [resetKey, setResetKey] = useState(0); // untuk reset dropdown kategori
 
     const handleCreate = async (e) => {
         e.preventDefault();
@@ -37,7 +36,6 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
             setUkuran('');
             setStatus('Aktif');
             setKategoriId(null);
-            setResetKey((k) => k + 1);
 
             if (onSuccess) {
                 onSuccess(result, {
@@ -62,7 +60,7 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
 
                 <div>
                     <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kategori</label>
-                    <KategoriSearchDropdown key={resetKey} value={kategoriId} onChange={setKategoriId} />
+                    <KategoriSearchDropdown value={kategoriId} onChange={setKategoriId} />
                 </div>
 
                 <div>

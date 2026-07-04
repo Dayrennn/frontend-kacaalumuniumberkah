@@ -20,7 +20,15 @@ export const barangAPI = createApi({
             query: () => '/barang',
             providesTags: ['barangAPI'],
         }),
+        modifyBarang: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/barang/update/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['barangAPI'],
+        }),
     }),
 });
 
-export const { useCreateBarangMutation, useSeeAllBarangQuery } = barangAPI;
+export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation } = barangAPI;

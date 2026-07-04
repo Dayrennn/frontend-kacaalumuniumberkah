@@ -11,6 +11,8 @@ import FormTambahBarang from '@/app/components/form/crud/create/formTambahBarang
 // import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 // import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
 import { useSeeAllBarangQuery } from '@/hooks/api/barangSliceAPI';
+import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
+import FormEditBarang from '@/app/components/form/crud/update/formEditBarang';
 
 export default function DataBarang() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -173,7 +175,7 @@ export default function DataBarang() {
                     successMessage="Berhasil Tambah Barang"
                 />
             )}
-            {/* {showModalEdit && (
+            {showModalEdit && (
                 <ModalEdit
                     onClose={() => setShowModalEdit(false)}
                     formEdit={FormEditBarang}
@@ -181,7 +183,7 @@ export default function DataBarang() {
                     successTitle="Berhasil"
                     successMessage="Data Berhasil Dirubah"
                 />
-            )} */}
+            )}
             {/* {showModalHapus && (
                 <ModalHapus
                     onClose={() => setShowModalHapus(false)}
