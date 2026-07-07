@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-import { useSeeAllBarangQuery } from '@/hooks/api/barangSliceAPI';
+import { useSeeBarangAktifQuery } from '@/hooks/api/barangSliceAPI';
 import { Loader2 } from 'lucide-react';
 
 export default function BarangSearchDropdown({ value, onChange, initialLabel }) {
@@ -9,8 +9,8 @@ export default function BarangSearchDropdown({ value, onChange, initialLabel }) 
     const [open, setOpen] = useState(false);
     const wrapperRef = useRef();
 
-    const { data: response, isLoading } = useSeeAllBarangQuery();
-    const barangList = response?.data?.barang ?? [];
+    const { data: response, isLoading } = useSeeBarangAktifQuery();
+    const barangList = response?.data ?? [];
 
     const filtered = barangList.filter((k) => k.namaBarang.toLowerCase().includes(search.toLowerCase()));
 

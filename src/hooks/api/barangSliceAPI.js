@@ -36,7 +36,12 @@ export const barangAPI = createApi({
             }),
             invalidatesTags: ['barangAPI'],
         }),
+        seeBarangAktif: builder.query({
+            query: () => '/barang/aktif',
+            providesTags: ['barangAPI'],
+        }),
     }),
 });
 
-export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation, useRemoveBarangMutation } = barangAPI;
+export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation, useRemoveBarangMutation, useSeeBarangAktifQuery } =
+    barangAPI;
