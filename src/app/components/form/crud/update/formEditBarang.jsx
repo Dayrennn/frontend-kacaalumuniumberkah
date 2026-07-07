@@ -45,7 +45,11 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
 
                 <div>
                     <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kategori</label>
-                    <KategoriSearchDropdown value={kategoriId} onChange={setKategoriId} />
+                    <KategoriSearchDropdown
+                        value={kategoriId}
+                        onChange={setKategoriId}
+                        initialLabel={initialData?.kategori?.namaKategori}
+                    />
                 </div>
 
                 <div>

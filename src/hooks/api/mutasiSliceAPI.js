@@ -27,7 +27,14 @@ export const mutasiAPI = createApi({
             },
         }),
         seeAllMutasiMasuk: builder.query({
-            query: () => '/mutasi/masuk',
+            query: ({ startDate, endDate } = {}) => {
+                const params = new URLSearchParams();
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+
+                const queryString = params.toString();
+                return `/mutasi/masuk${queryString ? `?${queryString}` : ''}`;
+            },
             providesTags: ['mutasiAPI'],
         }),
         seeMutasiMasukByBarang: builder.query({
@@ -51,7 +58,14 @@ export const mutasiAPI = createApi({
             },
         }),
         seeAllMutasiKeluar: builder.query({
-            query: () => '/mutasi/keluar',
+            query: ({ startDate, endDate } = {}) => {
+                const params = new URLSearchParams();
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+
+                const queryString = params.toString();
+                return `/mutasi/keluar${queryString ? `?${queryString}` : ''}`;
+            },
             providesTags: ['mutasiAPI'],
         }),
     }),
