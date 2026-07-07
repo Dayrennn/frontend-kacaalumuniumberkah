@@ -11,6 +11,7 @@ export default function ModalHapus({
     successMessage,
     initialData,
     onAfterSuccess,
+    title,
     ...formProps
 }) {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -36,7 +37,7 @@ export default function ModalHapus({
                         <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
                             <Trash2 className="w-4 h-4 text-red-600" />
                         </div>
-                        <h3 className="font-extrabold text-gray-900 text-sm">Hapus Kategori</h3>
+                        <h3 className="font-extrabold text-gray-900 text-sm">{title}</h3>
                     </div>
                     <button
                         onClick={onClose}

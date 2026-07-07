@@ -9,6 +9,7 @@ export default function ModalTambah({
     formTambah: FormTambahKategori,
     successTitle,
     successMessage,
+    title,
     ...formProps
 }) {
     const [showSuccess, setShowSuccess] = useState(false);
@@ -33,7 +34,7 @@ export default function ModalTambah({
                         <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
                             <Tags className="w-4 h-4 text-blue-600" />
                         </div>
-                        <h3 className="font-extrabold text-gray-900 text-sm">Tambah Kategori</h3>
+                        <h3 className="font-extrabold text-gray-900 text-sm">{title}</h3>
                     </div>
                     <button
                         onClick={onClose}

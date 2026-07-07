@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import { useAddBarangMasukMutation } from '@/hooks/api/mutasiSliceAPI';
+import { useAddBarangKeluarMutation } from '@/hooks/api/mutasiSliceAPI';
 import BarangSearchDropdown from '@/app/components/dropdown/barangSearchDropdown';
 
-export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
-    const [createBarangMasuk, { isLoading, isError, error }] = useAddBarangMasukMutation();
+export default function FormTambahBarangKeluar({ onCancel, onSuccess }) {
+    const [createBarangKeluar, { isLoading, isError, error }] = useAddBarangKeluarMutation();
     const [barangId, setBarangId] = useState(null);
     const [jumlah, setJumlah] = useState(0);
     const [keterangan, setKeterangan] = useState('');
@@ -14,7 +14,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
     const handleCreate = async (e) => {
         e.preventDefault();
         try {
-            const result = await createBarangMasuk({
+            const result = await createBarangKeluar({
                 data: {
                     barangId,
                     jumlah: Number(jumlah),
@@ -62,7 +62,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kode Barang</label>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Keterangan</label>
                     <input
                         type="text"
                         value={keterangan}

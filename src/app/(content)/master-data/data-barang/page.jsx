@@ -167,6 +167,7 @@ export default function DataBarang() {
                 <ModalTambah
                     onClose={() => setShowModalTambah(false)}
                     formTambah={FormTambahBarang}
+                    title="Tambah Data Barang"
                     successTitle="Berhasil"
                     successMessage="Berhasil Tambah Barang"
                 />
@@ -176,6 +177,7 @@ export default function DataBarang() {
                     onClose={() => setShowModalEdit(false)}
                     formEdit={FormEditBarang}
                     initialData={selectedBarang}
+                    title="Edot Data Barang"
                     successTitle="Berhasil"
                     successMessage="Data Berhasil Dirubah"
                 />
@@ -184,6 +186,7 @@ export default function DataBarang() {
                 <ModalHapus
                     onClose={() => setShowModalHapus(false)}
                     formHapus={FormHapusBarang}
+                    title="Hapus Data Barang"
                     successTitle="Berhasil"
                     successMessage="Berhasil Menghapus Data"
                     initialData={removeBarang}

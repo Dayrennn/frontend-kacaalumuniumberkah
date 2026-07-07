@@ -156,6 +156,7 @@ export default function DataKategori() {
                 <ModalTambah
                     onClose={() => setShowModalTambah(false)}
                     formTambah={FormTambahKategori}
+                    title="Tambah Kategori"
                     successTitle="Berhasil"
                     successMessage="Berhasil Tambah Kategori"
                 />
@@ -165,6 +166,7 @@ export default function DataKategori() {
                     onClose={() => setShowModalEdit(false)}
                     formEdit={FormEditKategori}
                     initialData={selectedKategori}
+                    title="Edit Kategori"
                     successTitle="Berhasil"
                     successMessage="Data Berhasil Dirubah"
                 />
@@ -173,6 +175,7 @@ export default function DataKategori() {
                 <ModalHapus
                     onClose={() => setShowModalHapus(false)}
                     formHapus={FormHapusKategori}
+                    title="Hapus Kategori"
                     successTitle="Berhasil"
                     successMessage="Berhasil Menghapus Data"
                     initialData={removeKategori}
