@@ -4,76 +4,21 @@ import { useState } from 'react';
 import { ArrowDownCircle, Package, TrendingUp, Search, Plus } from 'lucide-react';
 import StatCard from '@/app/components/card/statsCard';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
-// import FormTambahBarangMasuk from '@/app/components/form/crud/create/formTambahBarangMasuk';
-
-// Dummy data mengikuti struktur response API GET /api/mutasi-stok/masuk
-const dummyMutasiMasuk = [
-    {
-        id: 'c7d0bed4-e658-40b4-9acc-6f35a77e011a',
-        barangId: '5c1ad578-7dfe-4111-b1ba-6da29ce89ae0',
-        userId: '951f9ed4-db95-4b80-b636-a7d51ba932e8',
-        tipe: 'Masuk',
-        jumlah: 50,
-        stokSebelum: 90,
-        stokSesudah: 140,
-        keterangan: 'Pembelian dari CV Sumber Jaya',
-        createdAt: '2026-07-04T12:15:33.487Z',
-        barang: {
-            id: '5c1ad578-7dfe-4111-b1ba-6da29ce89ae0',
-            kategoriId: 'fecf8cf5-3e6f-447d-96e2-93b06be6d468',
-            namaBarang: 'Tes update barang',
-            kodeBarang: '',
-            jumlahBarang: 140,
-            status: 'Aktif',
-            ukuran: '30 cm X 90 cm',
-        },
-        user: {
-            id: '951f9ed4-db95-4b80-b636-a7d51ba932e8',
-            username: 'User1',
-            role: 'Admin_1',
-        },
-    },
-    {
-        id: 'a1b2c3d4-e5f6-4789-9abc-def012345678',
-        barangId: '7e2bd689-8efc-4222-c2cb-7eb30dfa1bf1',
-        userId: '951f9ed4-db95-4b80-b636-a7d51ba932e8',
-        tipe: 'Masuk',
-        jumlah: 25,
-        stokSebelum: 10,
-        stokSesudah: 35,
-        keterangan: 'Restock rutin bulanan',
-        createdAt: '2026-07-02T09:40:12.120Z',
-        barang: {
-            id: '7e2bd689-8efc-4222-c2cb-7eb30dfa1bf1',
-            kategoriId: 'fecf8cf5-3e6f-447d-96e2-93b06be6d468',
-            namaBarang: 'Karpet Lantai Vinyl',
-            kodeBarang: 'KRP-002',
-            jumlahBarang: 35,
-            status: 'Aktif',
-            ukuran: '2 m X 5 m',
-        },
-        user: {
-            id: '951f9ed4-db95-4b80-b636-a7d51ba932e8',
-            username: 'User1',
-            role: 'Admin_1',
-        },
-    },
-];
+import { useSeeAllMutasiMasukQuery } from '@/hooks/api/mutasiSliceAPI';
+import FormTambahBarangMasuk from '@/app/components/form/crud/create/formTambahMutasi';
 
 export default function DataBarangMasuk() {
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [keyword, setKeyword] = useState('');
 
-    // TODO: ganti ke useSeeAllMutasiMasukQuery() kalau API sudah siap
-    const mutasiList = dummyMutasiMasuk;
-    const isLoading = false;
-    const isError = false;
+    const { data: mutasi, isLoading, isError } = useSeeAllMutasiMasukQuery();
+    const mutasiList = mutasi?.data ?? [];
 
     const filtered = keyword.trim()
         ? mutasiList.filter((item) => item.barang?.namaBarang.toLowerCase().includes(keyword.toLowerCase()))
         : mutasiList;
 
-    const totalTransaksi = mutasiList.length;
+    //const totalTransaksi = mutasiList.length;
     const totalJumlahMasuk = mutasiList.reduce((sum, item) => sum + item.jumlah, 0);
     const totalBarangUnik = new Set(mutasiList.map((item) => item.barangId)).size;
 
@@ -106,9 +51,9 @@ export default function DataBarangMasuk() {
 
             {/* Stat cards */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <StatCard icon={ArrowDownCircle} label="Total Transaksi Masuk" value={totalTransaksi} tone="blue" />
+                {/* <StatCard icon={ArrowDownCircle} label="Total Transaksi Masuk" value={totalTransaksi} tone="blue" /> */}
                 <StatCard icon={TrendingUp} label="Total Unit Masuk" value={totalJumlahMasuk} tone="green" />
-                <StatCard icon={Package} label="Jenis Barang Terlibat" value={totalBarangUnik} tone="amber" />
+                <StatCard icon={Package} label="Jenis Barang" value={totalBarangUnik} tone="amber" />
             </div>
 
             {/* Tabel */}
@@ -201,7 +146,7 @@ export default function DataBarangMasuk() {
             {showModalTambah && (
                 <ModalTambah
                     onClose={() => setShowModalTambah(false)}
-                    //formTambah={FormTambahBarangMasuk}
+                    formTambah={FormTambahBarangMasuk}
                     successTitle="Berhasil"
                     successMessage="Berhasil Menambahkan Barang Masuk"
                 />
