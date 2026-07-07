@@ -28,7 +28,15 @@ export const barangAPI = createApi({
             }),
             invalidatesTags: ['barangAPI'],
         }),
+        removeBarang: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/barang/delete/${id}`,
+                method: 'DELETE',
+                body: data,
+            }),
+            invalidatesTags: ['barangAPI'],
+        }),
     }),
 });
 
-export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation } = barangAPI;
+export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation, useRemoveBarangMutation } = barangAPI;

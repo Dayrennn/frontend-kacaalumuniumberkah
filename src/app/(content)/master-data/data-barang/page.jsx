@@ -6,13 +6,11 @@ import StatCard from '@/app/components/card/statsCard';
 import StatusBadge from '@/app/components/badge/statusBadge';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
 import FormTambahBarang from '@/app/components/form/crud/create/formTambahBarang';
-// import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
-// import FormEditBarang from '@/app/components/form/crud/update/formEditBarang';
-// import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
-// import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
 import { useSeeAllBarangQuery } from '@/hooks/api/barangSliceAPI';
 import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
 import FormEditBarang from '@/app/components/form/crud/update/formEditBarang';
+import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
+import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
 
 export default function DataBarang() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -20,7 +18,7 @@ export default function DataBarang() {
     const [showModalHapus, setShowModalHapus] = useState(false);
 
     const { data: response, isLoading, isError } = useSeeAllBarangQuery();
-    const barangList = response?.data ?? [];
+    const barangList = response?.data?.barang ?? [];
 
     const [keyword, setKeyword] = useState('');
 
@@ -28,9 +26,7 @@ export default function DataBarang() {
         ? barangList.filter((item) => item.namaBarang.toLowerCase().includes(keyword.toLowerCase()))
         : barangList;
 
-    const total = barangList.length;
-    const totalAktif = barangList.filter((b) => b.status === 'Aktif').length;
-    const totalNonaktif = total - totalAktif;
+    const summary = response?.data?.summary ?? { totalBarang: 0, barangAktif: 0, barangNonaktif: 0 };
 
     const [selectedBarang, setSelectedBarang] = useState(null);
     const handleEdit = (barang) => {
@@ -63,9 +59,9 @@ export default function DataBarang() {
 
             {/* Stat cards */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <StatCard icon={Package} label="Total Barang" value={total} tone="blue" />
-                <StatCard icon={CheckCircle2} label="Barang Aktif" value={totalAktif} tone="green" />
-                <StatCard icon={XCircle} label="Barang Nonaktif" value={totalNonaktif} tone="amber" />
+                <StatCard icon={Package} label="Total Barang" value={summary.totalBarang} tone="blue" />
+                <StatCard icon={CheckCircle2} label="Barang Aktif" value={summary.barangAktif} tone="green" />
+                <StatCard icon={XCircle} label="Barang Nonaktif" value={summary.barangNonaktif} tone="amber" />
             </div>
 
             {/* Tabel */}
@@ -184,7 +180,7 @@ export default function DataBarang() {
                     successMessage="Data Berhasil Dirubah"
                 />
             )}
-            {/* {showModalHapus && (
+            {showModalHapus && (
                 <ModalHapus
                     onClose={() => setShowModalHapus(false)}
                     formHapus={FormHapusBarang}
@@ -192,7 +188,7 @@ export default function DataBarang() {
                     successMessage="Berhasil Menghapus Data"
                     initialData={removeBarang}
                 />
-            )} */}
+            )}
         </div>
     );
 }

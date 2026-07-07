@@ -26,9 +26,7 @@ export default function DataKategori() {
         ? kategoriList.filter((item) => item.namaKategori.toLowerCase().includes(keyword.toLowerCase()))
         : kategoriList;
 
-    const total = kategoriList.length;
-    const totalAktif = kategoriList.filter((k) => k.status === 'Aktif').length;
-    const totalNonaktif = total - totalAktif;
+    const summary = response?.data?.summary ?? { totalKategori: 0, totalKategoriAktif: 0, totalKategoriNonaktif: 0 };
 
     const [selectedKategori, setSelectedKategori] = useState(null);
     const handleEdit = (kategori) => {
@@ -61,9 +59,9 @@ export default function DataKategori() {
 
             {/* Stat cards */}
             <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
-                <StatCard icon={Tags} label="Total Kategori" value={total} tone="blue" />
-                <StatCard icon={CheckCircle2} label="Kategori Aktif" value={totalAktif} tone="green" />
-                <StatCard icon={XCircle} label="Kategori Nonaktif" value={totalNonaktif} tone="amber" />
+                <StatCard icon={Tags} label="Total Kategori" value={summary.totalKategori} tone="blue" />
+                <StatCard icon={CheckCircle2} label="Kategori Aktif" value={summary.totalKategoriAktif} tone="green" />
+                <StatCard icon={XCircle} label="Kategori Nonaktif" value={summary.totalKategoriNonaktif} tone="amber" />
             </div>
 
             {/* Tabel */}

@@ -87,11 +87,11 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    <SidebarGroup icon={Warehouse} label="Gudang" basePath="/dashboard/gudang">
-                        <SidebarSubLink href="/dashboard/gudang/barang-masuk" icon={ArrowDownToLine}>
+                    <SidebarGroup icon={Warehouse} label="Gudang" basePath="/gudang">
+                        <SidebarSubLink href="/gudang/barang-masuk" icon={ArrowDownToLine}>
                             Barang Masuk
                         </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/gudang/barang-keluar" icon={ArrowUpFromLine}>
+                        <SidebarSubLink href="/gudang/barang-keluar" icon={ArrowUpFromLine}>
                             Barang Keluar
                         </SidebarSubLink>
                     </SidebarGroup>
