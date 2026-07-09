@@ -2,6 +2,7 @@
 
 import { ImageOff, Pencil, Trash2 } from 'lucide-react';
 import BACKEND_URL from '@/hooks/lib/backendUrl';
+import StatusBadge from '../badge/statusBadge';
 
 export default function AdsCard({ item, onEdit, onDelete }) {
     const imageUrl = item.produkImageUrl ? `${BACKEND_URL}${item.produkImageUrl}` : null;
@@ -9,7 +10,7 @@ export default function AdsCard({ item, onEdit, onDelete }) {
     return (
         <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
             {/* Gambar */}
-            <div className="relative aspect-[4/3] bg-gray-50 overflow-hidden">
+            <div className="relative aspect-4/3 bg-gray-50 overflow-hidden">
                 {imageUrl ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -51,7 +52,10 @@ export default function AdsCard({ item, onEdit, onDelete }) {
 
             {/* Konten */}
             <div className="p-4 flex flex-col flex-1">
-                <h3 className="font-bold text-gray-900 text-sm leading-snug">{item.barang?.namaBarang}</h3>
+                <div className="flex items-start justify-between gap-2">
+                    <h3 className="font-bold text-gray-900 text-sm leading-snug">{item.barang?.namaBarang}</h3>
+                    {item.barang?.status && <StatusBadge status={item.barang.status} />}
+                </div>
                 <p className="text-[11px] font-medium text-gray-400 mt-1">{item.barang?.ukuran}</p>
                 <p className="text-xs text-gray-500 mt-2 leading-relaxed line-clamp-3 flex-1">{item.deskripsi}</p>
             </div>

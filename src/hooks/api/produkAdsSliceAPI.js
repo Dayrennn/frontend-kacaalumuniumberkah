@@ -14,6 +14,7 @@ export const adsAPI = createApi({
                 method: 'POST',
                 body: data,
             }),
+            invalidatesTags: ['adsAPI'],
         }),
         seeAllProdukAds: builder.query({
             query: ({ page = 1, limit = 10 } = {}) => `/produk-ads?page=${page}&limit=${limit}`,
