@@ -96,18 +96,6 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    {/* <SidebarGroup icon={ClipboardList} label="Laporan" basePath="/dashboard/laporan">
-                        <SidebarSubLink href="/dashboard/laporan/stok-barang" icon={ClipboardList}>
-                            Stok Barang
-                        </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/laporan/riwayat-masuk" icon={ArrowDownToLine}>
-                            Riwayat Barang Masuk
-                        </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/laporan/riwayat-keluar" icon={ArrowUpFromLine}>
-                            Riwayat Barang Keluar
-                        </SidebarSubLink>
-                    </SidebarGroup> */}
-
                     <SidebarGroup icon={Building2} label="Company Profile" basePath="/company-profile">
                         <SidebarSubLink href="/company-profile/banner" icon={ImageIcon}>
                             Banner
