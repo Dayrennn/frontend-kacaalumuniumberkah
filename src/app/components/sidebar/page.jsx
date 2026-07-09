@@ -96,7 +96,7 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    <SidebarGroup icon={ClipboardList} label="Laporan" basePath="/dashboard/laporan">
+                    {/* <SidebarGroup icon={ClipboardList} label="Laporan" basePath="/dashboard/laporan">
                         <SidebarSubLink href="/dashboard/laporan/stok-barang" icon={ClipboardList}>
                             Stok Barang
                         </SidebarSubLink>
@@ -106,37 +106,30 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         <SidebarSubLink href="/dashboard/laporan/riwayat-keluar" icon={ArrowUpFromLine}>
                             Riwayat Barang Keluar
                         </SidebarSubLink>
-                    </SidebarGroup>
+                    </SidebarGroup> */}
 
-                    <SidebarGroup icon={Building2} label="Company Profile" basePath="/dashboard/company-profile">
-                        <SidebarSubLink href="/dashboard/company-profile/banner" icon={ImageIcon}>
+                    <SidebarGroup icon={Building2} label="Company Profile" basePath="/company-profile">
+                        <SidebarSubLink href="/company-profile/banner" icon={ImageIcon}>
                             Banner
                         </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/company-profile/produk" icon={Box}>
+                        <SidebarSubLink href="/company-profile/produk" icon={Box}>
                             Produk
                         </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/company-profile/profil" icon={Building2}>
+                        <SidebarSubLink href="/company-profile/profil" icon={Building2}>
                             Profil Perusahaan
                         </SidebarSubLink>
-                        <SidebarSubLink href="/dashboard/company-profile/kontak" icon={Phone}>
+                        <SidebarSubLink href="/company-profile/kontak" icon={Phone}>
                             Kontak
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    {/* Contoh menu khusus role — tinggal bungkus item/group manapun */}
                     {isOwner && (
-                        <SidebarLink href="/dashboard/pengguna" icon={Users}>
+                        <SidebarLink href="/pengguna" icon={Users}>
                             Pengguna
                         </SidebarLink>
                     )}
 
-                    {(isAdmin || isOwner) && (
-                        <SidebarLink href="/dashboard/activity-log" icon={Activity}>
-                            Activity Log
-                        </SidebarLink>
-                    )}
-
-                    <SidebarLink href="/dashboard/pengaturan" icon={Settings}>
+                    <SidebarLink href="/pengaturan" icon={Settings}>
                         Pengaturan
                     </SidebarLink>
                 </nav>
