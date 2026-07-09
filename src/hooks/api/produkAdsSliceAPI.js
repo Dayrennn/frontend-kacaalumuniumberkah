@@ -20,7 +20,23 @@ export const adsAPI = createApi({
             query: ({ page = 1, limit = 10 } = {}) => `/produk-ads?page=${page}&limit=${limit}`,
             providesTags: ['adsAPI'],
         }),
+        modifyProdukAds: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/produk-ads/update/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['adsAPI'],
+        }),
+        removeProdukAds: builder.mutation({
+            query: (id) => ({
+                url: `/produk-ads/delete/${id}`,
+                method: 'DELETE',
+            }),
+            invalidatesTags: ['adsAPI'],
+        }),
     }),
 });
 
-export const { useCreateAdsMutation, useSeeAllProdukAdsQuery } = adsAPI;
+export const { useCreateAdsMutation, useSeeAllProdukAdsQuery, useModifyProdukAdsMutation, useRemoveProdukAdsMutation } =
+    adsAPI;

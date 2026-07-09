@@ -6,12 +6,19 @@ import StatCard from '@/app/components/card/statsCard';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
 import FormTambahIklan from '@/app/components/form/crud/create/formTambahAds';
 import AdsCard from '@/app/components/card/adsCard';
-import { useSeeAllProdukAdsQuery } from '@/hooks/api/produkAdsSliceAPI';
+import { useSeeAllProdukAdsQuery, useRemoveProdukAdsMutation } from '@/hooks/api/produkAdsSliceAPI';
+import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
+import FormEditAds from '@/app/components/form/crud/update/formEditAds';
+import ModalKonfirmasiHapus from '@/app/components/modal/modal-crud/modalKonfirmasiHapus';
 
 export default function DataProduk() {
     const [keyword, setKeyword] = useState('');
     const [kategoriFilter, setKategoriFilter] = useState('Semua');
     const [showModalTambah, setShowModalTambah] = useState(false);
+    const [showModalEdit, setShowModalEdit] = useState(false);
+    const [showModalHapus, setShowModalHapus] = useState(false);
+
+    const [deleteAds] = useRemoveProdukAdsMutation();
 
     const { data: ads, isLoading, isError } = useSeeAllProdukAdsQuery();
     const produkList = ads?.data || [];
@@ -34,14 +41,20 @@ export default function DataProduk() {
     const totalProduk = produkList.length;
     const totalKategori = new Set(produkList.map((item) => item.barang?.kategori?.namaKategori)).size;
 
+    const [selectedBarang, setSelectedBarang] = useState(null);
     const handleEdit = (item) => {
-        // TODO: buka modal edit dengan data `item`
-        console.log('Edit:', item);
+        setShowModalEdit(true);
+        setSelectedBarang(item);
     };
 
+    const [deleteBarang, setDeleteBarang] = useState(null);
     const handleDelete = (item) => {
-        // TODO: konfirmasi & panggil mutation delete
-        console.log('Delete:', item);
+        setDeleteBarang(item);
+        setShowModalHapus(true);
+    };
+
+    const handleConfirm = async (id) => {
+        await deleteAds(id).unwrap();
     };
 
     return (
@@ -120,7 +133,12 @@ export default function DataProduk() {
                         {filtered.length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                                 {filtered.map((item) => (
-                                    <AdsCard key={item.id} item={item} onEdit={handleEdit} onDelete={handleDelete} />
+                                    <AdsCard
+                                        key={item.id}
+                                        item={item}
+                                        onEdit={handleEdit}
+                                        onDelete={() => handleDelete(item)}
+                                    />
                                 ))}
                             </div>
                         ) : (
@@ -137,6 +155,27 @@ export default function DataProduk() {
                     successTitle="Berhasil"
                     successMessage="Berhasil Tambah Iklan"
                     title="Tambah Data Iklan"
+                />
+            )}
+            {showModalEdit && (
+                <ModalEdit
+                    onClose={() => setShowModalEdit(false)}
+                    formEdit={FormEditAds}
+                    initialData={selectedBarang}
+                    successTitle="Berhasil"
+                    successMessage="Berhasil Update Iklan"
+                    title="Update Iklan"
+                />
+            )}
+            {showModalHapus && (
+                <ModalKonfirmasiHapus
+                    onClose={() => setShowModalHapus(false)}
+                    onConfirm={handleConfirm}
+                    successTitle="Berhasil"
+                    successMessage="Berhasil Hapus Iklan"
+                    title="Hapus Iklan"
+                    initialData={deleteBarang}
+                    message={`Apakah kamu yakin ingin menghapus "${deleteBarang?.barang?.namaBarang}"?`}
                 />
             )}
         </div>
