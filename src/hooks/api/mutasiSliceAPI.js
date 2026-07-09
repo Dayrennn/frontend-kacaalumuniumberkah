@@ -27,13 +27,14 @@ export const mutasiAPI = createApi({
             },
         }),
         seeAllMutasiMasuk: builder.query({
-            query: ({ startDate, endDate } = {}) => {
+            query: ({ startDate, endDate, page = 1, limit = 10 } = {}) => {
                 const params = new URLSearchParams();
                 if (startDate) params.append('startDate', startDate);
                 if (endDate) params.append('endDate', endDate);
+                params.append('page', page);
+                params.append('limit', limit);
 
-                const queryString = params.toString();
-                return `/mutasi/masuk${queryString ? `?${queryString}` : ''}`;
+                return `/mutasi/masuk?${params.toString()}`;
             },
             providesTags: ['mutasiAPI'],
         }),
@@ -58,13 +59,14 @@ export const mutasiAPI = createApi({
             },
         }),
         seeAllMutasiKeluar: builder.query({
-            query: ({ startDate, endDate } = {}) => {
+            query: ({ startDate, endDate, page = 1, limit = 10 } = {}) => {
                 const params = new URLSearchParams();
                 if (startDate) params.append('startDate', startDate);
                 if (endDate) params.append('endDate', endDate);
+                params.append('page', page);
+                params.append('limit', limit);
 
-                const queryString = params.toString();
-                return `/mutasi/keluar${queryString ? `?${queryString}` : ''}`;
+                return `/mutasi/keluar?${params.toString()}`;
             },
             providesTags: ['mutasiAPI'],
         }),
