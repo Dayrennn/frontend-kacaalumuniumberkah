@@ -111,6 +111,8 @@ export default function DataBarang() {
                                     <th className="px-5 py-3 font-semibold">Kategori</th>
                                     <th className="px-5 py-3 font-semibold">Ukuran</th>
                                     <th className="px-5 py-3 font-semibold">Jumlah</th>
+                                    <th className="px-5 py-3 font-semibold">Harga</th>
+                                    <th className="px-5 py-3 font-semibold">Jenis Penjualan</th>
                                     <th className="px-5 py-3 font-semibold">Status</th>
                                     <th className="px-5 py-3 font-semibold text-right">Aksi</th>
                                 </tr>
@@ -126,6 +128,8 @@ export default function DataBarang() {
                                         </td>
                                         <td className="px-5 py-3 text-gray-500">{item.ukuran || '-'}</td>
                                         <td className="px-5 py-3 text-gray-500">{item.jumlahBarang}</td>
+                                        <td className="px-5 py-3 text-gray-500">{item.harga || 0}</td>
+                                        <td className="px-5 py-3 text-gray-500">{item.jenisPenjualan || '-'}</td>
                                         <td className="px-5 py-3">
                                             <StatusBadge status={item.status} />
                                         </td>

@@ -25,8 +25,8 @@ export default function BarangSearchDropdown({ value, onChange, initialLabel }) 
     }, []);
 
     const handleSelect = (barang) => {
-        setSearch(`${barang.namaBarang} - ${barang.ukuran}`);
-        onChange(barang.id);
+        setSearch(`${barang.namaBarang} - ${barang.ukuran} - ${barang.jenisPenjualan}`);
+        onChange(barang.id, barang);
         setOpen(false);
     };
 
@@ -61,7 +61,7 @@ export default function BarangSearchDropdown({ value, onChange, initialLabel }) 
                                 onClick={() => handleSelect(k)}
                                 className="w-full text-left px-3 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
                             >
-                                <span className="font-medium">{k.namaBarang} - {k.ukuran}</span>
+                                <span className="font-medium">{k.namaBarang} - {k.ukuran} - {k.jenisPenjualan}</span>
                             </button>
                         ))
                     )}

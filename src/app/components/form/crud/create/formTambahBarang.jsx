@@ -11,6 +11,8 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
     const [kodeBarang, setKodeBarang] = useState('');
     const [jumlahBarang, setJumlahBarang] = useState('');
     const [ukuran, setUkuran] = useState('');
+    const [harga, setHarga] = useState(0);
+    const [jenisPenjualan, setJenisPenjualan] = useState('PCS');
     const [kategoriId, setKategoriId] = useState(null);
     const [status, setStatus] = useState('Aktif');
 
@@ -25,6 +27,8 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
                     ukuran,
                     status,
                     kategoriId,
+                    harga,
+                    jenisPenjualan,
                 },
             }).unwrap();
 
@@ -36,6 +40,8 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
             setUkuran('');
             setStatus('Aktif');
             setKategoriId(null);
+            setHarga(0);
+            setJenisPenjualan('PCS');
 
             if (onSuccess) {
                 onSuccess(result, {
@@ -50,61 +56,77 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
     const errorMessage = error?.data?.message || (isError ? 'Gagal menyimpan barang.' : '');
 
     return (
-        <form onSubmit={handleCreate}>
-            <div className="px-6 py-5 space-y-4">
+        <form onSubmit={handleCreate} className="flex flex-col max-h-[85vh] sm:max-h-[80vh]">
+            {/* Area konten bisa scroll, supaya modal tidak overflow di layar kecil */}
+            <div className="px-4 sm:px-6 py-5 space-y-4 overflow-y-auto">
                 {errorMessage && (
                     <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
                         {errorMessage}
                     </p>
                 )}
 
+                {/* Kategori full width */}
                 <div>
                     <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kategori</label>
                     <KategoriSearchDropdown value={kategoriId} onChange={setKategoriId} />
                 </div>
 
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Nama Barang</label>
-                    <input
-                        type="text"
-                        value={namaBarang}
-                        onChange={(e) => setNamaBarang(e.target.value)}
-                        placeholder="Contoh: Alat Tulis Kantor"
-                        autoFocus
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
-                </div>
+                {/* Grid 2 kolom di layar >= sm, 1 kolom di mobile */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Nama Barang</label>
+                        <input
+                            type="text"
+                            value={namaBarang}
+                            onChange={(e) => setNamaBarang(e.target.value)}
+                            placeholder="Contoh: Alat Tulis Kantor"
+                            autoFocus
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
 
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kode Barang</label>
-                    <input
-                        type="text"
-                        value={kodeBarang}
-                        onChange={(e) => setKodeBarang(e.target.value)}
-                        placeholder="Contoh: C-0123"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
-                </div>
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kode Barang</label>
+                        <input
+                            type="text"
+                            value={kodeBarang}
+                            onChange={(e) => setKodeBarang(e.target.value)}
+                            placeholder="Contoh: C-0123"
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
 
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jumlah Barang</label>
-                    <input
-                        type="number"
-                        value={jumlahBarang}
-                        onChange={(e) => setJumlahBarang(e.target.value)}
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
-                </div>
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jumlah Barang</label>
+                        <input
+                            type="number"
+                            value={jumlahBarang}
+                            onChange={(e) => setJumlahBarang(e.target.value)}
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
 
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Ukuran</label>
-                    <input
-                        type="text"
-                        value={ukuran}
-                        onChange={(e) => setUkuran(e.target.value)}
-                        placeholder="Contoh: 30 x 30 cm"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Ukuran</label>
+                        <input
+                            type="text"
+                            value={ukuran}
+                            onChange={(e) => setUkuran(e.target.value)}
+                            placeholder="Contoh: 30 x 30 cm"
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Harga</label>
+                        <input
+                            type="number"
+                            value={harga}
+                            onChange={(e) => setHarga(e.target.value)}
+                            placeholder="Contoh: 50000"
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
                 </div>
 
                 <div>
@@ -115,7 +137,7 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
                                 key={opt}
                                 type="button"
                                 onClick={() => setStatus(opt)}
-                                className={`flex-1 text-sm font-semibold px-4 py-2.5 rounded-xl border transition-colors ${
+                                className={`flex-1 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2.5 rounded-xl border transition-colors ${
                                     status === opt
                                         ? opt === 'Aktif'
                                             ? 'bg-green-50 border-green-200 text-green-700'
@@ -128,9 +150,32 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
                         ))}
                     </div>
                 </div>
+
+                <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jenis Penjualan</label>
+                    <div className="flex items-center gap-2">
+                        {['PCS', 'Potongan'].map((opt) => (
+                            <button
+                                key={opt}
+                                type="button"
+                                onClick={() => setJenisPenjualan(opt)}
+                                className={`flex-1 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2.5 rounded-xl border transition-colors ${
+                                    jenisPenjualan === opt
+                                        ? opt === 'Potongan'
+                                            ? 'bg-green-50 border-green-200 text-green-700'
+                                            : 'bg-amber-50 border-amber-200 text-amber-700'
+                                        : 'bg-white border-gray-200 text-gray-400 hover:bg-gray-50'
+                                }`}
+                            >
+                                {opt}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
 
-            <div className="flex items-center gap-2 px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+            {/* Footer sticky di bawah, stack di layar sangat kecil */}
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-2 px-4 sm:px-6 py-4 border-t border-gray-100 bg-gray-50/50 shrink-0">
                 <button
                     type="button"
                     onClick={onCancel}

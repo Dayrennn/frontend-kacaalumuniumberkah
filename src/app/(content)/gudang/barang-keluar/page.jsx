@@ -202,6 +202,7 @@ export default function DataBarangKeluar() {
                                         <th className="px-5 py-3 font-semibold">Jumlah Keluar</th>
                                         <th className="px-5 py-3 font-semibold">Stok Sebelum</th>
                                         <th className="px-5 py-3 font-semibold">Stok Sesudah</th>
+                                        <th className="px-5 py-3 font-semibold">Total Harga</th>
                                         <th className="px-5 py-3 font-semibold">Keterangan</th>
                                         <th className="px-5 py-3 font-semibold">Oleh</th>
                                         <th className="px-5 py-3 font-semibold">Tanggal</th>
@@ -227,6 +228,7 @@ export default function DataBarangKeluar() {
                                             </td>
                                             <td className="px-5 py-3 text-gray-500">{item.stokSebelum}</td>
                                             <td className="px-5 py-3 font-medium text-gray-900">{item.stokSesudah}</td>
+                                            <td className="px-5 py-3 text-gray-500">{item.totalHarga || '-'}</td>
                                             <td className="px-5 py-3 text-gray-500">{item.keterangan || '-'}</td>
                                             <td className="px-5 py-3 text-gray-500">{item.user?.username ?? '-'}</td>
                                             <td className="px-5 py-3 text-gray-500 whitespace-nowrap">
