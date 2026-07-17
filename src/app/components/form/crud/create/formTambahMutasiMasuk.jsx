@@ -10,6 +10,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
     const [barangId, setBarangId] = useState(null);
     const [jumlah, setJumlah] = useState(0);
     const [keterangan, setKeterangan] = useState('');
+    const [suplier, setSuplier] = useState('');
 
     const handleCreate = async (e) => {
         e.preventDefault();
@@ -19,12 +20,14 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
                     barangId,
                     jumlah: Number(jumlah),
                     keterangan,
+                    suplier,
                 },
             }).unwrap();
 
             setBarangId(null);
             setJumlah('');
             setKeterangan('');
+            setSuplier('');
 
             if (onSuccess) {
                 onSuccess(result);
@@ -50,9 +53,21 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jumlah Barang</label>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Supplier</label>
                     <input
                         type="text"
+                        value={suplier}
+                        onChange={(e) => setSuplier(e.target.value)}
+                        placeholder="Contoh: pabrik abc"
+                        autoFocus
+                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jumlah Barang</label>
+                    <input
+                        type="number"
                         value={jumlah}
                         onChange={(e) => setJumlah(e.target.value)}
                         placeholder="Contoh: 400"

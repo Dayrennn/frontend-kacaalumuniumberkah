@@ -40,7 +40,6 @@ export default function DataBarangKeluar() {
     const mutasiList = mutasi?.data?.data ?? [];
     const meta = mutasi?.data?.meta ?? { total: 0, page: 1, limit, totalPages: 1 };
 
-
     // Catatan: search keyword di sini masih filter di data 1 halaman saja (client-side).
     // Kalau mau search across semua data, sebaiknya keyword juga dikirim ke backend (server-side search).
     const filtered = keyword.trim()
@@ -197,6 +196,7 @@ export default function DataBarangKeluar() {
                                     <tr className="text-left text-gray-400 text-xs uppercase tracking-wide">
                                         <th className="px-5 py-3 font-semibold w-16">No</th>
                                         <th className="px-5 py-3 font-semibold">Nama Barang</th>
+                                        <th className="px-5 py-3 font-semibold">Nama Customer</th>
                                         <th className="px-5 py-3 font-semibold">Kode Barang</th>
                                         <th className="px-5 py-3 font-semibold">Ukuran Barang</th>
                                         <th className="px-5 py-3 font-semibold">Jumlah Keluar</th>
@@ -216,6 +216,9 @@ export default function DataBarangKeluar() {
                                             </td>
                                             <td className="px-5 py-3 font-medium text-gray-900">
                                                 {item.barang?.namaBarang ?? '-'}
+                                            </td>
+                                            <td className="px-5 py-3 font-medium text-gray-900">
+                                                {item?.customer ?? '-'}
                                             </td>
                                             <td className="px-5 py-3 text-gray-500">
                                                 {item.barang?.kodeBarang || '-'}

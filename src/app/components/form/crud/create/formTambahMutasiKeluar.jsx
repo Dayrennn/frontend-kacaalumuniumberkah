@@ -23,6 +23,7 @@ export default function FormTambahBarangKeluar({ onCancel, onSuccess }) {
     const [ambilDariLembaran, setAmbilDariLembaran] = useState(null); // <-- true / false / null
     const [panjangCustom, setPanjangCustom] = useState('');
     const [lebarCustom, setLebarCustom] = useState('');
+    const [customer, setCustomer] = useState('');
 
     const isPotongan = selectedBarang?.jenisPenjualan === 'Potongan';
 
@@ -68,6 +69,7 @@ export default function FormTambahBarangKeluar({ onCancel, onSuccess }) {
                     barangId,
                     jumlah: Number(jumlah),
                     keterangan,
+                    customer,
                     ...(isPotongan && {
                         ambilDariLembaran,
                         panjangCustom: Number(panjangCustom),
@@ -83,6 +85,7 @@ export default function FormTambahBarangKeluar({ onCancel, onSuccess }) {
             setAmbilDariLembaran(null);
             setPanjangCustom('');
             setLebarCustom('');
+            setCustomer('');
 
             if (onSuccess) {
                 onSuccess(result);
@@ -115,12 +118,22 @@ export default function FormTambahBarangKeluar({ onCancel, onSuccess }) {
                     <BarangSearchDropdown value={barangId} onChange={handleSelectBarang} />
                 </div>
 
+                <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Customer</label>
+                    <input
+                        type="text"
+                        value={customer}
+                        onChange={(e) => setCustomer(e.target.value)}
+                        placeholder="Contoh: Udin"
+                        autoFocus
+                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                    />
+                </div>
+
                 {/* Muncul hanya kalau barang yang dipilih jenisPenjualan-nya Potongan */}
                 {isPotongan && (
                     <div>
-                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">
-                            Sumber Bahan
-                        </label>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Sumber Bahan</label>
                         <div className="flex items-center gap-2">
                             <button
                                 type="button"

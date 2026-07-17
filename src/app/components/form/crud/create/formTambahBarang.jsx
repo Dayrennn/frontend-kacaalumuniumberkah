@@ -9,7 +9,7 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
     const [createBarang, { isLoading, isError, error }] = useCreateBarangMutation();
     const [namaBarang, setNamaBarang] = useState('');
     const [kodeBarang, setKodeBarang] = useState('');
-    const [jumlahBarang, setJumlahBarang] = useState('');
+    const [jumlahBarang, setJumlahBarang] = useState(0);
     const [ukuran, setUkuran] = useState('');
     const [harga, setHarga] = useState(0);
     const [jenisPenjualan, setJenisPenjualan] = useState('PCS');
@@ -36,7 +36,7 @@ export default function FormTambahBarang({ onCancel, onSuccess }) {
 
             setNamaBarang('');
             setKodeBarang('');
-            setJumlahBarang('');
+            setJumlahBarang(0);
             setUkuran('');
             setStatus('Aktif');
             setKategoriId(null);
