@@ -111,7 +111,13 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    {isOwner && (
+                    <SidebarGroup icon={ClipboardList} label="Laporan" basePath="/laporan">
+                        <SidebarSubLink href="/laporan/keluar" icon={ClipboardList}>
+                            Laporan Keluar
+                        </SidebarSubLink>
+                    </SidebarGroup>
+
+                    {(isOwner || isAdmin) && (
                         <SidebarLink href="/pengguna" icon={Users}>
                             Pengguna
                         </SidebarLink>

@@ -11,10 +11,12 @@ import {
     X,
     ChevronLeft,
     ChevronRight,
+    Printer,
 } from 'lucide-react';
 import StatCard from '@/app/components/card/statsCard';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
 import { useSeeAllMutasiMasukQuery } from '@/hooks/api/mutasiSliceAPI';
+import { useLazyPrintLaporanMasukQuery } from '@/hooks/api/laporanSliceAPI';
 import FormTambahBarangMasuk from '@/app/components/form/crud/create/formTambahMutasiMasuk';
 import { formatTanggal } from '@/hooks/utils/formatTanggal';
 
@@ -36,6 +38,8 @@ export default function DataBarangMasuk() {
         page,
         limit,
     });
+
+    const [triggerCetakPDF, { isFetching: isLoadingPDF }] = useLazyPrintLaporanMasukQuery();
 
     const mutasiList = mutasi?.data?.data ?? [];
     const meta = mutasi?.data?.meta ?? { total: 0, page: 1, limit, totalPages: 1 };
@@ -77,21 +81,41 @@ export default function DataBarangMasuk() {
         return pages;
     };
 
+    const handleCetakPDF = async () => {
+        try {
+            const blob = await triggerCetakPDF({ startDate, endDate }).unwrap();
+            const url = window.URL.createObjectURL(blob);
+            window.open(url, '_blank');
+            setTimeout(() => window.URL.revokeObjectURL(url), 10000);
+        } catch (err) {
+            console.error('Gagal Cetak PDF');
+        }
+    };
+
     return (
         <div className="p-6 lg:p-8 space-y-6">
             {/* Header */}
             <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
-                    <h1 className="text-2xl font-extrabold text-gray-900">Barang Masuk</h1>
-                    <p className="text-gray-500 text-sm mt-1">Riwayat penambahan stok barang</p>
+                    <h1 className="text-2xl font-extrabold text-gray-900">Barang Keluar</h1>
+                    <p className="text-gray-500 text-sm mt-1">Riwayat pengeluaran stok barang</p>
                 </div>
-                <button
-                    className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm"
-                    onClick={() => setShowModalTambah(true)}
-                >
-                    <Plus className="w-4 h-4" />
-                    Tambah Barang Masuk
-                </button>
+                <div className="flex items-center gap-2">
+                    <button
+                        className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 transition-colors text-gray-700 text-sm font-semibold px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm"
+                        onClick={handleCetakPDF}
+                    >
+                        <Printer className="w-4 h-4" />
+                        Cetak Laporan PDF
+                    </button>
+                    <button
+                        className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm"
+                        onClick={() => setShowModalTambah(true)}
+                    >
+                        <Plus className="w-4 h-4" />
+                        Tambah Barang Keluar
+                    </button>
+                </div>
             </div>
 
             {/* Stat cards */}
