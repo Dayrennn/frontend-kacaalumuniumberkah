@@ -6,6 +6,7 @@ import { barangAPI } from '@/hooks/api/barangSliceAPI';
 import { mutasiAPI } from '@/hooks/api/mutasiSliceAPI';
 import { adsAPI } from '@/hooks/api/produkAdsSliceAPI';
 import { laporanAPI } from '@/hooks/api/laporanSliceAPI';
+import { companyAPI } from '@/hooks/api/companySliceAPI';
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
         [mutasiAPI.reducerPath]: mutasiAPI.reducer,
         [adsAPI.reducerPath]: adsAPI.reducer,
         [laporanAPI.reducerPath]: laporanAPI.reducer,
+        [companyAPI.reducerPath]: companyAPI.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
@@ -24,5 +26,6 @@ export const store = configureStore({
             .concat(barangAPI.middleware)
             .concat(mutasiAPI.middleware)
             .concat(adsAPI.middleware)
-            .concat(laporanAPI.middleware),
+            .concat(laporanAPI.middleware)
+            .concat(companyAPI.middleware),
 });

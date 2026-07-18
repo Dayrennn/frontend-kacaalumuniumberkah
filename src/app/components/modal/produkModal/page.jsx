@@ -1,9 +1,17 @@
 'use client';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function ProdukModal({ product, onClose }) {
     if (!product) return null;
+
+    const formattedHarga = product.harga
+        ? new Intl.NumberFormat('id-ID', {
+              style: 'currency',
+              currency: 'IDR',
+              minimumFractionDigits: 0,
+          }).format(product.harga)
+        : null;
 
     return (
         <div
@@ -14,12 +22,21 @@ export default function ProdukModal({ product, onClose }) {
                 className="modal-content bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden relative"
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Header dengan gradient sesuai tema cta-banner */}
-                <div
-                    className="relative h-32 flex items-center justify-center"
-                    style={product.bg ? { background: product.bg } : { background: '#dbeafe' }}
-                >
-                    <Image src={product.image} alt={product.name} width={120} height={120} />
+                {/* Gambar Produk */}
+                <div className="relative w-full h-56 bg-gray-100">
+                    {product.image ? (
+                        <Image
+                            src={product.image}
+                            alt={product.name || 'Produk'}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 448px) 100vw, 448px"
+                        />
+                    ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
+                            Tidak ada gambar
+                        </div>
+                    )}
 
                     <button
                         onClick={onClose}
@@ -29,25 +46,45 @@ export default function ProdukModal({ product, onClose }) {
                         <i className="fa-solid fa-xmark text-gray-700"></i>
                     </button>
 
-                    <span className="absolute top-3 left-3 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1">
-                        <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Available
-                    </span>
+                    {product.status && (
+                        <span className="absolute top-3 left-3 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span>
+                            {product.status}
+                        </span>
+                    )}
                 </div>
 
                 {/* Body */}
                 <div className="p-6">
                     <div className="flex items-center gap-2 mb-3">
-                        <span className={`${product.badge} text-xs font-semibold px-2.5 py-1 rounded-full`}>
-                            {product.badgeLabel}
-                        </span>
-                        <span className="text-gray-400 text-xs capitalize">{product.category}</span>
+                        {product.category && (
+                            <span className="bg-blue-50 text-blue-700 text-xs font-semibold px-2.5 py-1 rounded-full capitalize">
+                                {product.category}
+                            </span>
+                        )}
+                        {product.kodeBarang && <span className="text-gray-400 text-xs">{product.kodeBarang}</span>}
                     </div>
 
-                    <h3 className="text-xl font-extrabold text-gray-900 mb-3">{product.name}</h3>
+                    <h3 className="text-xl font-extrabold text-gray-900 mb-1">{product.name}</h3>
 
-                    <p className="text-gray-500 text-sm leading-relaxed mb-6">{product.desc}</p>
+                    {formattedHarga && (
+                        <p className="text-blue-600 font-bold text-lg mb-3">
+                            {formattedHarga}
+                            {product.jenisPenjualan && (
+                                <span className="text-gray-400 text-sm font-normal"> / {product.jenisPenjualan}</span>
+                            )}
+                        </p>
+                    )}
 
-                    <div className="flex gap-3">
+                    {product.ukuran && (
+                        <p className="text-gray-500 text-sm mb-1">
+                            <span className="font-semibold text-gray-600">Ukuran:</span> {product.ukuran}
+                        </p>
+                    )}
+
+                    {product.desc && <p className="text-gray-500 text-sm leading-relaxed mt-3 mb-6">{product.desc}</p>}
+
+                    <div className="flex gap-3 mt-6">
                         <a
                             href="https://wa.me/628112345678"
                             className="flex-1 inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl transition-all text-sm"
