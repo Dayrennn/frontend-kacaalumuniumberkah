@@ -11,6 +11,7 @@ import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
 import FormEditBarang from '@/app/components/form/crud/update/formEditBarang';
 import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
+import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
 export default function DataBarang() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -39,6 +40,10 @@ export default function DataBarang() {
         setRemoveBarang(barang);
         setShowModalHapus(true);
     };
+
+    if (isLoading) {
+        return <TableSkeleton statCount={3} columns={9} />;
+    }
 
     return (
         <div className="p-6 lg:p-8 space-y-6">

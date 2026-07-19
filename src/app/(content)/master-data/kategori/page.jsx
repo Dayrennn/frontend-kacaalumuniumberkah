@@ -11,6 +11,7 @@ import ModalEdit from '@/app/components/modal/modal-crud/modalEdit';
 import FormEditKategori from '@/app/components/form/crud/update/formEditKategori';
 import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusKategori from '@/app/components/form/crud/delete/formHapusKategori';
+import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
 export default function DataKategori() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -39,6 +40,10 @@ export default function DataKategori() {
         setRemoveKategori(kategori);
         setShowModalHapus(true);
     };
+
+    if (isLoading) {
+        return <TableSkeleton statCount={3} columns={9} />;
+    }
 
     return (
         <div className="p-6 lg:p-8 space-y-6">

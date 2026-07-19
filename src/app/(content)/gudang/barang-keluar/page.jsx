@@ -19,6 +19,7 @@ import { useSeeAllMutasiKeluarQuery } from '@/hooks/api/mutasiSliceAPI';
 import { useLazyPrintLaporanKeluarQuery } from '@/hooks/api/laporanSliceAPI';
 import { formatTanggal } from '@/hooks/utils/formatTanggal';
 import FormTambahBarangKeluar from '@/app/components/form/crud/create/formTambahMutasiKeluar';
+import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
 export default function DataBarangKeluar() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -91,6 +92,10 @@ export default function DataBarangKeluar() {
             console.error('Gagal cetak PDF:', err);
         }
     };
+
+    if (isLoading) {
+        return <TableSkeleton statCount={3} columns={9} />;
+    }
 
     return (
         <div className="p-6 lg:p-8 space-y-6">
@@ -255,7 +260,9 @@ export default function DataBarangKeluar() {
                                             </td>
                                             <td className="px-5 py-3 text-gray-500">{item.stokSebelum}</td>
                                             <td className="px-5 py-3 font-medium text-gray-900">{item.stokSesudah}</td>
-                                            <td className="px-5 py-3 font-medium text-gray-900">{item.barang?.jenisPenjualan}</td>
+                                            <td className="px-5 py-3 font-medium text-gray-900">
+                                                {item.barang?.jenisPenjualan}
+                                            </td>
                                             <td className="px-5 py-3 text-gray-500">{item.totalHarga || '-'}</td>
                                             <td className="px-5 py-3 text-gray-500">{item.keterangan || '-'}</td>
                                             <td className="px-5 py-3 text-gray-500">{item.user?.username ?? '-'}</td>

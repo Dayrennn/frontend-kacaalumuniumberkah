@@ -19,6 +19,7 @@ import { useSeeAllMutasiMasukQuery } from '@/hooks/api/mutasiSliceAPI';
 import { useLazyPrintLaporanMasukQuery } from '@/hooks/api/laporanSliceAPI';
 import FormTambahBarangMasuk from '@/app/components/form/crud/create/formTambahMutasiMasuk';
 import { formatTanggal } from '@/hooks/utils/formatTanggal';
+import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
 export default function DataBarangMasuk() {
     const [showModalTambah, setShowModalTambah] = useState(false);
@@ -91,6 +92,10 @@ export default function DataBarangMasuk() {
             console.error('Gagal Cetak PDF');
         }
     };
+
+    if (isLoading) {
+        return <TableSkeleton statCount={3} columns={9} />;
+    }
 
     return (
         <div className="p-6 lg:p-8 space-y-6">
