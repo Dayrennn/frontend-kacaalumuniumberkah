@@ -1,3 +1,5 @@
+'use client'
+
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function Address() {
