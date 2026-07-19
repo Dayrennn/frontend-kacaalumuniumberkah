@@ -2,7 +2,7 @@ import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function Address() {
     const { data: response } = useSeeAllCompanyQuery();
-    const companyData = response?.data?.[0];
+    const companyData = response?.data || [];
 
     const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const lokasiPerusahaan = companyData?.lokasi;

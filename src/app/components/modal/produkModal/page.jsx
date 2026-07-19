@@ -5,7 +5,7 @@ import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function ProdukModal({ product, onClose }) {
     const { data: response } = useSeeAllCompanyQuery();
-    const companyData = response?.data?.[0];
+    const companyData = response?.data || [];
 
     const telephonePerusahaan = companyData?.telephone;
 

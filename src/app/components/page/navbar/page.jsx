@@ -10,7 +10,7 @@ export default function Navbar() {
     const closeMenu = () => setIsOpen(false);
 
     const { data: response, isLoading } = useSeeAllCompanyQuery();
-    const companyData = response?.data?.[0];
+    const companyData = response?.data || [];
 
     const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
 
@@ -38,7 +38,7 @@ export default function Navbar() {
 
                     {/* Desktop Nav */}
                     <ul className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-                        {['home', 'about', 'products', 'address', 'contact'].map((id) => (
+                        {['home', 'about', 'products', 'benefit', 'address', 'contact'].map((id) => (
                             <li key={id}>
                                 <a href={`#${id}`} className="hover:text-blue-600 transition-colors capitalize">
                                     {id === 'about'
@@ -76,6 +76,7 @@ export default function Navbar() {
                             ['#home', 'Home'],
                             ['#about', 'Profile'],
                             ['#products', 'Products'],
+                            ['#benefit', 'Benefit'],
                             ['#address', 'Address'],
                             ['#contact', 'Contact'],
                         ].map(([href, label]) => (

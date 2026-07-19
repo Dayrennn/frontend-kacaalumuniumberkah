@@ -3,7 +3,7 @@ import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function BannerCTA() {
     const { data: response } = useSeeAllCompanyQuery();
-    const companyData = response?.data?.[0];
+    const companyData = response?.data || [];
 
     const telephonePerusahaan = companyData?.telephone;
 

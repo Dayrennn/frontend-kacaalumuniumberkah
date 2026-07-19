@@ -1,11 +1,12 @@
 'use client';
 
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+import { useSeeAllBannerQuery } from '@/hooks/api/companySliceAPI';
 import Image from 'next/image';
 
 export default function HeroBanner() {
     const { data: response } = useSeeAllCompanyQuery();
-    const companyData = response?.data?.[0];
+    const companyData = response?.data || [];
 
     const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const deskripsi = companyData?.deskripsiPerusahaan || '-';
@@ -14,9 +15,14 @@ export default function HeroBanner() {
     const lastWord = namaWords[namaWords.length - 1];
     const firstWords = namaWords.slice(0, -1).join(' ');
 
+    const { data: banner } = useSeeAllBannerQuery();
+    const bannerData = banner?.data ?? [];
+
+    const image = bannerData?.bannerImageUrl;
+
     return (
         <>
-            <Image src="/images/hero.jpg" alt="Hero Background" fill className="object-cover object-center" priority />
+            <Image src={image} alt="Hero Background" fill className="object-cover object-center" priority />
 
             {/* Overlay gradient biru dari kiri */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/70 to-transparent pointer-events-none" />

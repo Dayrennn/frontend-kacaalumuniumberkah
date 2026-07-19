@@ -24,7 +24,25 @@ export const companyAPI = createApi({
             query: () => '/company',
             providesTags: ['companyAPI'],
         }),
+        createBanner: builder.mutation({
+            query: (data) => ({
+                url: '/company/upload',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['companyAPI'],
+        }),
+        seeAllBanner: builder.query({
+            query: () => '/company/banner',
+            providesTags: ['companyAPI'],
+        }),
     }),
 });
 
-export const { useSeeAllAdsQuery, useCreateCompanyMutation, useSeeAllCompanyQuery } = companyAPI;
+export const {
+    useSeeAllAdsQuery,
+    useCreateCompanyMutation,
+    useSeeAllCompanyQuery,
+    useCreateBannerMutation,
+    useSeeAllBannerQuery,
+} = companyAPI;

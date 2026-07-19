@@ -35,7 +35,7 @@ export default function Home() {
                     <Produk />
                 </section>
 
-                <section className="py-24 bg-white">
+                <section  id='benefit' className="py-24 bg-white">
                     <Keuntungan />
                 </section>
 
