@@ -1,6 +1,30 @@
 import Image from 'next/image';
+import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function BannerCTA() {
+    const { data: response } = useSeeAllCompanyQuery();
+    const companyData = response?.data?.[0];
+
+    const telephonePerusahaan = companyData?.telephone;
+
+    // Format nomor telephone ke format wa.me (62xxxxxxxxxx, tanpa strip/spasi)
+    const formatWhatsAppNumber = (phone) => {
+        if (!phone) return '';
+        // Hapus semua karakter selain angka
+        let cleaned = phone.replace(/\D/g, '');
+        // Kalau diawali '0', ganti jadi '62'
+        if (cleaned.startsWith('0')) {
+            cleaned = '62' + cleaned.slice(1);
+        }
+        // Kalau belum diawali '62' sama sekali (misal cuma '8123...'), tambahkan '62'
+        else if (!cleaned.startsWith('62')) {
+            cleaned = '62' + cleaned;
+        }
+        return cleaned;
+    };
+
+    const waNumber = formatWhatsAppNumber(telephonePerusahaan);
+    const waLink = `https://wa.me/${waNumber}`;
     return (
         <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -35,7 +59,7 @@ export default function BannerCTA() {
                         </p>
                         <div className="flex flex-wrap justify-center gap-4">
                             <a
-                                href="https://wa.me/6282310134497"
+                                href={waLink}
                                 target="_blank"
                                 className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm sm:text-base"
                             >

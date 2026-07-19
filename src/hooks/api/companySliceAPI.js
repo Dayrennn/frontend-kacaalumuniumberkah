@@ -12,7 +12,19 @@ export const companyAPI = createApi({
             query: () => '/company/ads',
             providesTags: ['companyAPI'],
         }),
+        createCompany: builder.mutation({
+            query: (data) => ({
+                url: '/company/kelola-landing-page',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['companyAPI'],
+        }),
+        seeAllCompany: builder.query({
+            query: () => '/company',
+            providesTags: ['companyAPI'],
+        }),
     }),
 });
 
-export const { useSeeAllAdsQuery } = companyAPI;
+export const { useSeeAllAdsQuery, useCreateCompanyMutation, useSeeAllCompanyQuery } = companyAPI;

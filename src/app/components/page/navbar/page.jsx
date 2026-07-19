@@ -1,12 +1,22 @@
 'use client';
 
 import { useState } from 'react';
+import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => setIsOpen((prev) => !prev);
     const closeMenu = () => setIsOpen(false);
+
+    const { data: response, isLoading } = useSeeAllCompanyQuery();
+    const companyData = response?.data?.[0];
+
+    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
+
+    const namaWords = namaPerusahaan.trim().split(' ');
+    const lastWord = namaWords[namaWords.length - 1];
+    const firstWords = namaWords.slice(0, -1).join(' ');
 
     return (
         <>
@@ -15,7 +25,14 @@ export default function Navbar() {
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-2 group">
                         <span className="text-xl font-extrabold text-gray-900">
-                            Berkah Kaca <span className="text-blue-600">Alumunium</span>
+                            {isLoading ? (
+                                'Loading...'
+                            ) : (
+                                <>
+                                    {firstWords && `${firstWords} `}
+                                    <span className="text-blue-600">{lastWord}</span>
+                                </>
+                            )}
                         </span>
                     </a>
 

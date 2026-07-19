@@ -1,4 +1,34 @@
+import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+
 export default function Address() {
+    const { data: response } = useSeeAllCompanyQuery();
+    const companyData = response?.data?.[0];
+
+    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
+    const lokasiPerusahaan = companyData?.lokasi;
+    const telephonePerusahaan = companyData?.telephone;
+    const emailPerusahaan = companyData?.email;
+    const jadwalPerusahaan = companyData?.jadwal;
+
+    // Format nomor telephone ke format wa.me (62xxxxxxxxxx, tanpa strip/spasi)
+    const formatWhatsAppNumber = (phone) => {
+        if (!phone) return '';
+        // Hapus semua karakter selain angka
+        let cleaned = phone.replace(/\D/g, '');
+        // Kalau diawali '0', ganti jadi '62'
+        if (cleaned.startsWith('0')) {
+            cleaned = '62' + cleaned.slice(1);
+        }
+        // Kalau belum diawali '62' sama sekali (misal cuma '8123...'), tambahkan '62'
+        else if (!cleaned.startsWith('62')) {
+            cleaned = '62' + cleaned;
+        }
+        return cleaned;
+    };
+
+    const waNumber = formatWhatsAppNumber(telephonePerusahaan);
+    const waLink = `https://wa.me/${waNumber}`;
+
     return (
         <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,9 +45,7 @@ export default function Address() {
                     <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 flex flex-col gap-6">
                         <div className="flex items-center gap-3 pb-5 border-b border-gray-100">
                             <div>
-                                <h3 className="font-extrabold text-gray-900 text-lg leading-tight">
-                                    Berkah Kaca Alumunium
-                                </h3>
+                                <h3 className="font-extrabold text-gray-900 text-lg leading-tight">{namaPerusahaan}</h3>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -26,9 +54,7 @@ export default function Address() {
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Alamat</p>
-                                <p className="text-gray-500 text-sm leading-relaxed">
-                                    Caringin, Kec. Legok, Kabupaten Tangerang, Banten
-                                </p>
+                                <p className="text-gray-500 text-sm leading-relaxed">{lokasiPerusahaan}</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -38,11 +64,11 @@ export default function Address() {
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Whatsapp / Telephone</p>
                                 <a
-                                    href="https://wa.me/6282310134497"
+                                    href={waLink}
                                     target="_blank"
                                     className="text-blue-600 text-sm font-medium hover:underline"
                                 >
-                                    +62 82310134497
+                                    +{waNumber}
                                 </a>
                             </div>
                         </div>
@@ -53,10 +79,10 @@ export default function Address() {
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Email</p>
                                 <a
-                                    href="mailto:bkh.pvc@gmail.com"
+                                    href={`mailto:${emailPerusahaan}`}
                                     className="text-blue-600 text-sm font-medium hover:underline"
                                 >
-                                    bkh.pvc@gmail.com
+                                    {emailPerusahaan}
                                 </a>
                             </div>
                         </div>
@@ -67,15 +93,13 @@ export default function Address() {
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-1">Jadwal</p>
                                 <div className="text-gray-500 text-sm space-y-0.5">
-                                    <p>
-                                        Senin – Minggu: <span className="font-medium text-gray-700">08:00 – 17:00</span>
-                                    </p>
+                                    <p>{jadwalPerusahaan}</p>
                                 </div>
                             </div>
                         </div>
                         <div className="pt-4 border-t border-gray-100 flex gap-3">
                             <a
-                                href="https://wa.me/6282310134497"
+                                href={waLink}
                                 target="_blank"
                                 className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
                                 aria-label="WhatsApp"

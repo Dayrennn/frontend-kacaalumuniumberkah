@@ -1,8 +1,32 @@
 'use client';
 
 import Image from 'next/image';
+import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
 export default function ProdukModal({ product, onClose }) {
+    const { data: response } = useSeeAllCompanyQuery();
+    const companyData = response?.data?.[0];
+
+    const telephonePerusahaan = companyData?.telephone;
+
+    const formatWhatsAppNumber = (phone) => {
+        if (!phone) return '';
+        // Hapus semua karakter selain angka
+        let cleaned = phone.replace(/\D/g, '');
+        // Kalau diawali '0', ganti jadi '62'
+        if (cleaned.startsWith('0')) {
+            cleaned = '62' + cleaned.slice(1);
+        }
+        // Kalau belum diawali '62' sama sekali (misal cuma '8123...'), tambahkan '62'
+        else if (!cleaned.startsWith('62')) {
+            cleaned = '62' + cleaned;
+        }
+        return cleaned;
+    };
+
+    const waNumber = formatWhatsAppNumber(telephonePerusahaan);
+    const waLink = `https://wa.me/${waNumber}`;
+
     if (!product) return null;
 
     const formattedHarga = product.harga
@@ -86,7 +110,7 @@ export default function ProdukModal({ product, onClose }) {
 
                     <div className="flex gap-3 mt-6">
                         <a
-                            href="https://wa.me/628112345678"
+                            href={waLink}
                             className="flex-1 inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl transition-all text-sm"
                         >
                             <i className="fa-brands fa-whatsapp text-lg"></i> Tanya Produk Ini

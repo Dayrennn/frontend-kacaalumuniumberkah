@@ -1,6 +1,19 @@
-import Image from "next/image";
+'use client';
+
+import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+import Image from 'next/image';
 
 export default function HeroBanner() {
+    const { data: response } = useSeeAllCompanyQuery();
+    const companyData = response?.data?.[0];
+
+    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
+    const deskripsi = companyData?.deskripsiPerusahaan || '-';
+
+    const namaWords = namaPerusahaan.trim().split(' ');
+    const lastWord = namaWords[namaWords.length - 1];
+    const firstWords = namaWords.slice(0, -1).join(' ');
+
     return (
         <>
             <Image src="/images/hero.jpg" alt="Hero Background" fill className="object-cover object-center" priority />
@@ -12,14 +25,11 @@ export default function HeroBanner() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                 <div className="max-w-xl">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-                        Berkah Kaca
+                        {firstWords}
                         <br />
-                        <span className="text-blue-300">Alumunium</span>
+                        <span className="text-blue-300">{lastWord}</span>
                     </h1>
-                    <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">
-                        Solusi lengkap bahan bangunan mulai dari papan gypsum dan plafon PVC hingga baja hollow, cat,
-                        dan aksesori. Kualitas profesional, harga bersaing, pengiriman cepat.
-                    </p>
+                    <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">{deskripsi}</p>
                     <div className="flex flex-wrap gap-4">
                         <a
                             href="#products"

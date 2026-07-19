@@ -10,14 +10,11 @@ import {
     Warehouse,
     ArrowDownToLine,
     ArrowUpFromLine,
-    ClipboardList,
     Image as ImageIcon,
     Box,
     Building2,
     Phone,
     Users,
-    Activity,
-    Settings,
     LogOut,
 } from 'lucide-react';
 import { useLogoutMutation, useGetMeQuery } from '@/hooks/api/userSliceAPI';
@@ -103,22 +100,13 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                         <SidebarSubLink href="/company-profile/produk" icon={Box}>
                             Produk
                         </SidebarSubLink>
-                        <SidebarSubLink href="/company-profile/profil" icon={Building2}>
+                        <SidebarSubLink href="/company-profile/profile-perusahaan" icon={Building2}>
                             Profil Perusahaan
-                        </SidebarSubLink>
-                        <SidebarSubLink href="/company-profile/kontak" icon={Phone}>
-                            Kontak
                         </SidebarSubLink>
                     </SidebarGroup>
 
-                    {(isOwner || isAdmin) && (
-                        <SidebarLink href="/pengguna" icon={Users}>
-                            Pengguna
-                        </SidebarLink>
-                    )}
-
-                    <SidebarLink href="/pengaturan" icon={Settings}>
-                        Pengaturan
+                    <SidebarLink href="/pengguna" icon={Users}>
+                        Pengguna
                     </SidebarLink>
                 </nav>
 
