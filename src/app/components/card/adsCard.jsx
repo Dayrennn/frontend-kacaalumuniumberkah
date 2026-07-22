@@ -1,11 +1,10 @@
 'use client';
 
 import { ImageOff, Pencil, Trash2 } from 'lucide-react';
-import BACKEND_URL from '@/hooks/lib/backendUrl';
 import StatusBadge from '../badge/statusBadge';
 
 export default function AdsCard({ item, onEdit, onDelete }) {
-    const imageUrl = item.produkImageUrl ? `${BACKEND_URL}${item.produkImageUrl}` : null;
+    const imageUrl = item.produkImageUrl ? `${item.produkImageUrl}` : null;
 
     return (
         <div className="group bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
