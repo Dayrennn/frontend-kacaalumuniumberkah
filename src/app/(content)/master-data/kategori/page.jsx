@@ -13,7 +13,12 @@ import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusKategori from '@/app/components/form/crud/delete/formHapusKategori';
 import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
+import { selectUser } from '@/hooks/api/authSliceAPI';
+import { useSelector } from 'react-redux';
+
 export default function DataKategori() {
+    const user = useSelector(selectUser);
+    const isOwner = user?.role === 'Owner';
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);
@@ -133,13 +138,15 @@ export default function DataKategori() {
                                                 >
                                                     <Pencil className="w-4 h-4" />
                                                 </button>
-                                                <button
-                                                    onClick={() => handleRemove(item)}
-                                                    title="Hapus kategori"
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                {isOwner && (
+                                                    <button
+                                                        onClick={() => handleRemove(item)}
+                                                        title="Hapus kategori"
+                                                        className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>

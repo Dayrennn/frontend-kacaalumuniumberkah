@@ -33,10 +33,10 @@ export default function FormLogin() {
 
             switch (user.role) {
                 case 'Admin_1':
-                    router.push('/dashboard/admin-1');
+                    router.push('/dashboard/admin');
                     break;
                 case 'Admin_2':
-                    router.push('/dashboard/admin-2');
+                    router.push('/dashboard/admin');
                     break;
                 case 'owner':
                     router.push('/dashboard/owner');

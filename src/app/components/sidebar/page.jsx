@@ -51,6 +51,8 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
         }
     };
 
+    const dashboardLink = isAdmin ? '/dashboard/admin' : isOwner ? '/dashboard/guru' : '/';
+
     return (
         <>
             {/* Overlay mobile */}
@@ -71,7 +73,7 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
 
                 {/* Menu */}
                 <nav className="flex-1 overflow-y-auto px-4 space-y-1 pb-4">
-                    <SidebarLink href="/dashboard" icon={LayoutDashboard}>
+                    <SidebarLink href={dashboardLink} icon={LayoutDashboard}>
                         Dashboard
                     </SidebarLink>
 

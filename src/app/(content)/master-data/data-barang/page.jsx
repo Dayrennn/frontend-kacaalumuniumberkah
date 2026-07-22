@@ -13,7 +13,13 @@ import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
 import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
 
+import { useSelector } from 'react-redux';
+import { selectUser } from '@/hooks/api/authSliceAPI';
+
 export default function DataBarang() {
+    const user = useSelector(selectUser);
+    // const isAdmin = user?.role === 'Admin_1' || user?.role === 'Admin_2';
+    const isOwner = user?.role === 'Owner';
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);
@@ -147,13 +153,15 @@ export default function DataBarang() {
                                                 >
                                                     <Pencil className="w-4 h-4" />
                                                 </button>
-                                                <button
-                                                    onClick={() => handleRemove(item)}
-                                                    title="Hapus barang"
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button>
+                                                {isOwner && (
+                                                    <button
+                                                        onClick={() => handleRemove(item)}
+                                                        title="Hapus barang"
+                                                        className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </div>
                                         </td>
                                     </tr>
