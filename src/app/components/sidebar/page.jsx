@@ -25,9 +25,8 @@ import LogoutModal from '../modal/logoutModal';
 import { logout as logoutAction } from '@/hooks/api/authSliceAPI';
 
 const ROLE_LABELS = {
-    Admin_1: 'Admin',
-    Admin_2: 'Admin',
-    owner: 'Owner',
+    Admin: 'Admin',
+    Owner: 'Owner',
 };
 
 export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner = false }) {
@@ -106,10 +105,11 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
                             Profil Perusahaan
                         </SidebarSubLink>
                     </SidebarGroup>
-
-                    <SidebarLink href="/pengguna" icon={Users}>
-                        Pengguna
-                    </SidebarLink>
+                    {isOwner && (
+                        <SidebarLink href="/pengguna" icon={Users}>
+                            Pengguna
+                        </SidebarLink>
+                    )}
                 </nav>
 
                 {/* Profile + Logout */}

@@ -10,8 +10,8 @@ export default function DashboardLayout({ children }) {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const user = useSelector(selectUser);
 
-    const isAdmin = user?.role === 'Admin_1' || user?.role === 'Admin_2';
-    const isOwner = user?.role === 'owner';
+    const isAdmin = user?.role === 'Admin';
+    const isOwner = user?.role === 'Owner';
 
     return (
         <div className="min-h-screen bg-gray-50">

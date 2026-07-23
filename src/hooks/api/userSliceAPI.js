@@ -27,7 +27,43 @@ export const userAPI = createApi({
             query: () => '/auth/me',
             providesTags: ['userAPI'],
         }),
+        createUser: builder.mutation({
+            query: ({ data }) => ({
+                url: '/auth/create',
+                method: 'POST',
+                body: data,
+            }),
+            invalidatesTags: ['userAPI'],
+        }),
+        seeAllUser: builder.query({
+            query: () => '/auth/all-user',
+            providesTags: ['userAPI'],
+        }),
+        modifyUser: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/auth/update/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['userAPI'],
+        }),
+        removeUser: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `/auth/delete/${id}`,
+                method: 'PUT',
+                body: data,
+            }),
+            invalidatesTags: ['userAPI'],
+        }),
     }),
 });
 
-export const { useLoginMutation, useLogoutMutation, useGetMeQuery } = userAPI;
+export const {
+    useLoginMutation,
+    useLogoutMutation,
+    useGetMeQuery,
+    useCreateUserMutation,
+    useSeeAllUserQuery,
+    useModifyUserMutation,
+    useRemoveUserMutation,
+} = userAPI;
