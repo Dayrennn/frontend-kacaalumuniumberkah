@@ -17,6 +17,7 @@ import ForbiddenModal from '@/app/components/modal/forbiddenModal';
 import { useRouter } from 'next/navigation';
 
 export default function DataPengguna() {
+    const router = useRouter();
     const user = useSelector(selectUser);
     const isOwner = user?.role === 'Owner';
 
@@ -44,7 +45,6 @@ export default function DataPengguna() {
         return <TableSkeleton statCount={3} columns={9} />;
     }
 
-    const router = useRouter();
     if (!isOwner) {
         return <ForbiddenModal onBack={() => router.back()} />;
     }
