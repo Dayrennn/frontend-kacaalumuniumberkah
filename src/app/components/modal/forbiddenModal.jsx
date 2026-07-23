@@ -14,7 +14,7 @@ export default function ForbiddenModal({ onBack }) {
                     </div>
                 </div>
 
-                <p className="text-center text-red-500 text-xs font-semibold tracking-wide mb-1">Error 401</p>
+                <p className="text-center text-red-500 text-xs font-semibold tracking-wide mb-1">Error 403</p>
                 <h2 className="text-center text-gray-900 font-bold text-lg mb-1">Akses Ditolak</h2>
                 <p className="text-center text-gray-500 text-sm mb-6">
                     Kamu tidak memiliki izin untuk mengakses halaman ini.
