@@ -50,7 +50,7 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
         }
     };
 
-    const dashboardLink = isAdmin ? '/dashboard/admin' : isOwner ? '/dashboard/guru' : '/';
+    const dashboardLink = isAdmin ? '/dashboard/admin' : isOwner ? '/dashboard/owner' : '/';
 
     return (
         <>

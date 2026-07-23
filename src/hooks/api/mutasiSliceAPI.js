@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../lib/baseQuery';
 import { barangAPI } from './barangSliceAPI';
+import { dashboardAPI } from './dashboardSliceAPI';
 
 export const mutasiAPI = createApi({
     reducerPath: 'mutasiAPI',
@@ -21,6 +22,7 @@ export const mutasiAPI = createApi({
                 try {
                     await queryFulfilled;
                     dispatch(barangAPI.util.invalidateTags(['barangAPI']));
+                    dispatch(dashboardAPI.util.invalidateTags(['dashboardAPI']));
                 } catch {
                     // gak perlu invalidate kalau mutation gagal
                 }
@@ -53,6 +55,7 @@ export const mutasiAPI = createApi({
                 try {
                     await queryFulfilled;
                     dispatch(barangAPI.util.invalidateTags(['barangAPI']));
+                    dispatch(dashboardAPI.util.invalidateTags(['dashboardAPI']));
                 } catch {
                     // gak perlu invalidate kalau mutation gagal
                 }

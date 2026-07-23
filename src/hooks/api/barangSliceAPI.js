@@ -1,5 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../lib/baseQuery';
+import { dashboardAPI } from './dashboardSliceAPI';
 
 export const barangAPI = createApi({
     reducerPath: 'barangAPI',
@@ -15,6 +16,14 @@ export const barangAPI = createApi({
                 body: data,
             }),
             invalidatesTags: ['barangAPI'],
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(dashboardAPI.util.invalidateTags(['dashboardAPI']));
+                } catch {
+                    // gak perlu invalidate kalau mutation gagal
+                }
+            },
         }),
         seeAllBarang: builder.query({
             query: () => '/barang',
@@ -27,6 +36,14 @@ export const barangAPI = createApi({
                 body: data,
             }),
             invalidatesTags: ['barangAPI'],
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(dashboardAPI.util.invalidateTags(['dashboardAPI']));
+                } catch {
+                    // gak perlu invalidate kalau mutation gagal
+                }
+            },
         }),
         removeBarang: builder.mutation({
             query: ({ id, data }) => ({
@@ -35,6 +52,14 @@ export const barangAPI = createApi({
                 body: data,
             }),
             invalidatesTags: ['barangAPI'],
+            async onQueryStarted(arg, { dispatch, queryFulfilled }) {
+                try {
+                    await queryFulfilled;
+                    dispatch(dashboardAPI.util.invalidateTags(['dashboardAPI']));
+                } catch {
+                    // gak perlu invalidate kalau mutation gagal
+                }
+            },
         }),
         seeBarangAktif: builder.query({
             query: () => '/barang/aktif',
@@ -43,5 +68,10 @@ export const barangAPI = createApi({
     }),
 });
 
-export const { useCreateBarangMutation, useSeeAllBarangQuery, useModifyBarangMutation, useRemoveBarangMutation, useSeeBarangAktifQuery } =
-    barangAPI;
+export const {
+    useCreateBarangMutation,
+    useSeeAllBarangQuery,
+    useModifyBarangMutation,
+    useRemoveBarangMutation,
+    useSeeBarangAktifQuery,
+} = barangAPI;
