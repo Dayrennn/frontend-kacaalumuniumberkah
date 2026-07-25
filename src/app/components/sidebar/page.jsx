@@ -13,7 +13,6 @@ import {
     Image as ImageIcon,
     Box,
     Building2,
-    Phone,
     Users,
     LogOut,
 } from 'lucide-react';
@@ -29,7 +28,7 @@ const ROLE_LABELS = {
     Owner: 'Owner',
 };
 
-export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner = false }) {
+export default function Sidebar({ open = true, onClose, isAdmin: isAdminProp = false, isOwner: isOwnerProp = false }) {
     const [showLogoutModal, setShowLogoutModal] = useState(false);
     const [logoutAPI, { isLoading: logoutLoading }] = useLogoutMutation();
     const { data: meData, isLoading: profileLoading } = useGetMeQuery();
@@ -38,6 +37,9 @@ export default function Sidebar({ open = true, onClose, isAdmin = false, isOwner
 
     const user = meData?.data;
     const roleLabel = user?.role ? (ROLE_LABELS[user.role] ?? user.role) : '';
+
+    const isAdmin = isAdminProp || user?.role === 'Admin';
+    const isOwner = isOwnerProp || user?.role === 'Owner';
 
     const handleLogout = async () => {
         try {

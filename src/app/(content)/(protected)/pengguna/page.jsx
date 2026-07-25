@@ -1,9 +1,9 @@
 'use client';
 
-import StatusBadge from '@/app/components/badge/statusBadge';
-import { Loader2, Package, Pencil, Plus, Search, ShieldAlert, Trash2, Users } from 'lucide-react';
+import { Loader2, Pencil, Plus, Trash2, Users } from 'lucide-react';
 import { useState } from 'react';
 import { useSeeAllUserQuery } from '@/hooks/api/userSliceAPI';
+import { useGetMeQuery } from '@/hooks/api/userSliceAPI';
 import { useSelector } from 'react-redux';
 import { selectUser } from '@/hooks/api/authSliceAPI';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
@@ -19,9 +19,17 @@ import { useRouter } from 'next/navigation';
 export default function DataPengguna() {
     const router = useRouter();
     const user = useSelector(selectUser);
-    const isOwner = user?.role === 'Owner';
 
-    const { data, isLoading, isError } = useSeeAllUserQuery(undefined, {
+    // useGetMeQuery jadi sumber kebenaran identitas user, karena state Redux (selectUser)
+    // bisa kosong sesaat setelah halaman di-refresh (belum sempat ter-rehydrate).
+    const { data: meData, isLoading: isMeLoading, isFetching: isMeFetching } = useGetMeQuery();
+    const me = meData?.data ?? null;
+
+    // Anggap owner kalau salah satu sumber (redux atau hasil fetch /me) bilang begitu,
+    // supaya begitu salah satu sumber sudah siap, akses tidak ke-block.
+    const isOwner = user?.role === 'Owner' || me?.role === 'Owner';
+
+    const { data, isLoading: isUserListLoading, isError } = useSeeAllUserQuery(undefined, {
         skip: !isOwner,
     });
     const userList = data?.data ?? [];
@@ -41,12 +49,16 @@ export default function DataPengguna() {
         setShowModalHapus(true);
     };
 
-    if (isLoading) {
+    if (isMeLoading || isMeFetching) {
         return <TableSkeleton statCount={3} columns={9} />;
     }
 
     if (!isOwner) {
         return <ForbiddenModal onBack={() => router.back()} />;
+    }
+
+    if (isUserListLoading) {
+        return <TableSkeleton statCount={3} columns={9} />;
     }
     return (
         <div className="p-6 lg:p-8 space-y-6">
@@ -72,23 +84,15 @@ export default function DataPengguna() {
                     </div>
                 </div>
 
-                {/* State: loading */}
-                {isLoading && (
-                    <div className="flex items-center justify-center gap-2 px-5 py-14 text-gray-400 text-sm">
-                        <Loader2 className="w-4 h-4 animate-spin" />
-                        Memuat data penggna...
-                    </div>
-                )}
-
                 {/* State: error */}
-                {!isLoading && isError && (
+                {isError && (
                     <div className="px-5 py-14 text-center text-sm text-red-500">
                         Gagal memuat data pengguna. Coba muat ulang halaman.
                     </div>
                 )}
 
                 {/* State: sukses */}
-                {!isLoading && !isError && (
+                {!isError && (
                     <div className="overflow-x-auto">
                         <table className="w-full text-sm">
                             <thead>
@@ -100,40 +104,42 @@ export default function DataPengguna() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50">
-                                {userList.map((item, idx) => (
-                                    <tr key={item.id} className="hover:bg-gray-50/60 transition-colors">
-                                        <td className="px-5 py-3 text-gray-400">{idx + 1}</td>
-                                        <td className="px-5 py-3 font-medium text-gray-900">{item.username}</td>
-                                        <td className="px-5 py-3 text-gray-500">{item.role || '-'}</td>
-                                        <td className="px-5 py-3">
-                                            <div className="flex items-center justify-end gap-2">
-                                                <button
-                                                    onClick={() => handleEdit(item)}
-                                                    title="Edit barang"
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
-                                                >
-                                                    <Pencil className="w-4 h-4" />
-                                                </button>
-                                                {isOwner && (
-                                                    <button
-                                                        onClick={() => handleRemove(item)}
-                                                        title="Hapus barang"
-                                                        className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </button>
+                                {userList.map((item, idx) => {
+                                    const isSelf = item.id === me?.id;
+
+                                    return (
+                                        <tr key={item.id} className="hover:bg-gray-50/60 transition-colors">
+                                            <td className="px-5 py-3 text-gray-400">{idx + 1}</td>
+                                            <td className="px-5 py-3 font-medium text-gray-900">
+                                                {item.username}
+                                                {isSelf && (
+                                                    <span className="ml-2 text-xs font-normal text-blue-500">(Anda)</span>
                                                 )}
-                                                {/* <button
-                                                    onClick={() => handleRemove(item)}
-                                                    title="Hapus barang"
-                                                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                                                >
-                                                    <Trash2 className="w-4 h-4" />
-                                                </button> */}
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))}
+                                            </td>
+                                            <td className="px-5 py-3 text-gray-500">{item.role || '-'}</td>
+                                            <td className="px-5 py-3">
+                                                <div className="flex items-center justify-end gap-2">
+                                                    <button
+                                                        onClick={() => handleEdit(item)}
+                                                        title="Edit barang"
+                                                        className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-blue-600 hover:bg-blue-50 transition-colors"
+                                                    >
+                                                        <Pencil className="w-4 h-4" />
+                                                    </button>
+                                                    {isOwner && !isSelf && (
+                                                        <button
+                                                            onClick={() => handleRemove(item)}
+                                                            title="Hapus barang"
+                                                            className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                                        >
+                                                            <Trash2 className="w-4 h-4" />
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
 
                                 {userList.length === 0 && (
                                     <tr>
