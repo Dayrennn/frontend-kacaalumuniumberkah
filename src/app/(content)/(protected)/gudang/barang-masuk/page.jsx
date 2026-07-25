@@ -118,7 +118,7 @@ export default function DataBarangMasuk() {
                         onClick={() => setShowModalTambah(true)}
                     >
                         <Plus className="w-4 h-4" />
-                        Tambah Barang Keluar
+                        Tambah Barang Masuk
                     </button>
                 </div>
             </div>
