@@ -12,13 +12,12 @@ import FormEditKategori from '@/app/components/form/crud/update/formEditKategori
 import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusKategori from '@/app/components/form/crud/delete/formHapusKategori';
 import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
-
-import { selectUser } from '@/hooks/api/authSliceAPI';
-import { useSelector } from 'react-redux';
+import { useGetMeQuery } from '@/hooks/api/userSliceAPI';
 
 export default function DataKategori() {
-    const user = useSelector(selectUser);
-    const isOwner = user?.role === 'Owner';
+    const { data: meData } = useGetMeQuery();
+    const me = meData?.data ?? [];
+    const isOwner = me?.role === 'Owner';
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);

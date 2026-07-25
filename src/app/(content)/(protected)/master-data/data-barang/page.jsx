@@ -12,13 +12,12 @@ import FormEditBarang from '@/app/components/form/crud/update/formEditBarang';
 import ModalHapus from '@/app/components/modal/modal-crud/modalHapus';
 import FormHapusBarang from '@/app/components/form/crud/delete/formHapusBarang';
 import TableSkeleton from '@/app/components/skeleton/tableSkeleton';
-
-import { useSelector } from 'react-redux';
-import { selectUser } from '@/hooks/api/authSliceAPI';
+import { useGetMeQuery } from '@/hooks/api/userSliceAPI';
 
 export default function DataBarang() {
-    const user = useSelector(selectUser);
-    const isOwner = user?.role === 'Owner';
+    const { data: meData } = useGetMeQuery();
+    const me = meData?.data ?? [];
+    const isOwner = me?.role === 'Owner';
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);
