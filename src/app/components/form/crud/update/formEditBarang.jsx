@@ -11,6 +11,8 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
     const [kodeBarang, setKodeBarang] = useState(initialData?.kodeBarang || '');
     const [status, setStatus] = useState(initialData?.status || '');
     const [ukuran, setUkuran] = useState(initialData?.ukuran || '');
+    const [harga, setHarga] = useState(initialData?.harga || '');
+    const [jenisPenjualan, setJenisPenjualan] = useState(initialData?.jenisPenjualan || '');
     const [kategoriId, setKategoriId] = useState(initialData?.kategoriId || '');
 
     const handleEdit = async (e) => {
@@ -23,6 +25,8 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
                     kodeBarang,
                     status,
                     ukuran,
+                    harga,
+                    jenisPenjualan,
                     kategoriId,
                 },
             }).unwrap();
@@ -35,8 +39,8 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
     const errorMessage = error?.data?.message || (isError ? 'Gagal menyimpan barang.' : '');
 
     return (
-        <form onSubmit={handleEdit}>
-            <div className="px-6 py-5 space-y-4">
+        <form onSubmit={handleEdit} className="w-full max-w-2xl mx-auto">
+            <div className="px-4 sm:px-6 py-5 space-y-4">
                 {errorMessage && (
                     <p className="text-xs text-red-500 bg-red-50 border border-red-100 rounded-lg px-3 py-2">
                         {errorMessage}
@@ -52,49 +56,85 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
                     />
                 </div>
 
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Nama Barang</label>
-                    <input
-                        type="text"
-                        value={namaBarang}
-                        onChange={(e) => setNamaBarang(e.target.value)}
-                        placeholder="Contoh: Alat Tulis Kantor"
-                        autoFocus
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
+                {/* Nama Barang full width, Kode Barang stacks under it on mobile, side by side from sm up */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="sm:col-span-2">
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Nama Barang</label>
+                        <input
+                            type="text"
+                            value={namaBarang}
+                            onChange={(e) => setNamaBarang(e.target.value)}
+                            placeholder="Contoh: Alat Tulis Kantor"
+                            autoFocus
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kode Barang</label>
+                        <input
+                            type="text"
+                            value={kodeBarang}
+                            onChange={(e) => setKodeBarang(e.target.value)}
+                            placeholder="Contoh: C-0123"
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Ukuran</label>
+                        <input
+                            type="text"
+                            value={ukuran}
+                            onChange={(e) => setUkuran(e.target.value)}
+                            placeholder="Contoh: 30 x 30 cm"
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
+
+                    <div className="sm:col-span-2">
+                        <label className="block text-xs font-semibold text-gray-500 mb-1.5">Harga</label>
+                        <input
+                            type="text"
+                            value={harga}
+                            onChange={(e) => setHarga(e.target.value)}
+                            placeholder=""
+                            className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                        />
+                    </div>
                 </div>
 
                 <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Kode Barang</label>
-                    <input
-                        type="text"
-                        value={kodeBarang}
-                        onChange={(e) => setKodeBarang(e.target.value)}
-                        placeholder="Contoh: C-0123"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
-                </div>
-
-                <div>
-                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Ukuran</label>
-                    <input
-                        type="text"
-                        value={ukuran}
-                        onChange={(e) => setUkuran(e.target.value)}
-                        placeholder="Contoh: 30 x 30 cm"
-                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
-                    />
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Jenis Penjualan</label>
+                    <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
+                        {['PCS', 'Potongan'].map((opt) => (
+                            <button
+                                key={opt}
+                                type="button"
+                                onClick={() => setJenisPenjualan(opt)}
+                                className={`flex-1 min-w-[45%] sm:min-w-0 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2.5 rounded-xl border transition-colors ${
+                                    jenisPenjualan === opt
+                                        ? opt === 'Potongan'
+                                            ? 'bg-green-50 border-green-200 text-green-700'
+                                            : 'bg-amber-50 border-amber-200 text-amber-700'
+                                        : 'bg-white border-gray-200 text-gray-400 hover:bg-gray-50'
+                                }`}
+                            >
+                                {opt}
+                            </button>
+                        ))}
+                    </div>
                 </div>
 
                 <div>
                     <label className="block text-xs font-semibold text-gray-500 mb-1.5">Status</label>
-                    <div className="flex items-center gap-2">
+                    <div className="flex flex-wrap sm:flex-nowrap items-center gap-2">
                         {['Aktif', 'Nonaktif'].map((opt) => (
                             <button
                                 key={opt}
                                 type="button"
                                 onClick={() => setStatus(opt)}
-                                className={`flex-1 text-sm font-semibold px-4 py-2.5 rounded-xl border transition-colors ${
+                                className={`flex-1 min-w-[45%] sm:min-w-0 text-xs sm:text-sm font-semibold px-3 sm:px-4 py-2.5 rounded-xl border transition-colors ${
                                     status === opt
                                         ? opt === 'Aktif'
                                             ? 'bg-green-50 border-green-200 text-green-700'
@@ -109,7 +149,7 @@ export default function FormEditBarang({ initialData, onCancel, onSuccess }) {
                 </div>
             </div>
 
-            <div className="flex items-center gap-2 px-6 py-4 border-t border-gray-100 bg-gray-50/50">
+            <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center gap-2 px-4 sm:px-6 py-4 border-t border-gray-100 bg-gray-50/50">
                 <button
                     type="button"
                     onClick={onCancel}
