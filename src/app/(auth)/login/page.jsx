@@ -21,7 +21,7 @@ export default function Login() {
                         </svg>
                     </div>
                     <h1 className="text-2xl font-extrabold text-gray-900">Selamat Datang</h1>
-                    <p className="text-gray-500 text-sm mt-1">Masuk ke panel admin Plavon</p>
+                    <p className="text-gray-500 text-sm mt-1">Masuk ke panel admin</p>
                 </div>
 
                 {/* Form Card */}
@@ -29,7 +29,7 @@ export default function Login() {
 
                 {/* Footer */}
                 <p className="text-center text-xs text-gray-400 mt-6">
-                    &copy; {new Date().getFullYear()} Plavon. Hak cipta dilindungi.
+                    &copy; {new Date().getFullYear()} Kaca Alumunium Berkah. Hak cipta dilindungi.
                 </p>
             </div>
         </div>

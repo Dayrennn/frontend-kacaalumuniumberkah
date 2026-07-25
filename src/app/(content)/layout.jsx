@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }) {
                     >
                         <Menu className="w-5 h-5" />
                     </button>
-                    <span className="ml-3 font-bold text-gray-900">Plavon</span>
+                    <span className="ml-3 font-bold text-gray-900">Kaca Alumunium Berkah</span>
                 </header>
 
                 <main className="p-6">{children}</main>
