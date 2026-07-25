@@ -102,8 +102,8 @@ export default function DataBarangMasuk() {
             {/* Header */}
             <div className="flex items-center justify-between flex-wrap gap-4">
                 <div>
-                    <h1 className="text-2xl font-extrabold text-gray-900">Barang Keluar</h1>
-                    <p className="text-gray-500 text-sm mt-1">Riwayat pengeluaran stok barang</p>
+                    <h1 className="text-2xl font-extrabold text-gray-900">Barang Masuk</h1>
+                    <p className="text-gray-500 text-sm mt-1">Riwayat masuk stok barang</p>
                 </div>
                 <div className="flex items-center gap-2">
                     <button
