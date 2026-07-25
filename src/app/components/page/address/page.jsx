@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
@@ -9,6 +9,7 @@ export default function Address() {
     const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const lokasiPerusahaan = companyData?.lokasi;
     const telephonePerusahaan = companyData?.telephone;
+    const telephoneKedua = companyData?.secondTelephone;
     const emailPerusahaan = companyData?.email;
     const jadwalPerusahaan = companyData?.jadwal;
 
@@ -30,6 +31,8 @@ export default function Address() {
 
     const waNumber = formatWhatsAppNumber(telephonePerusahaan);
     const waLink = `https://wa.me/${waNumber}`;
+    const waNumber2 = formatWhatsAppNumber(telephoneKedua);
+    const waLink2 = `https://wa.me/${waNumber2}`;
 
     return (
         <>
@@ -72,6 +75,18 @@ export default function Address() {
                                 >
                                     +{waNumber}
                                 </a>
+                                {telephoneKedua && (
+                                    <>
+                                        <br />
+                                        <a
+                                            href={waLink2}
+                                            target="_blank"
+                                            className="text-blue-600 text-sm font-medium hover:underline"
+                                        >
+                                            +{waNumber2}
+                                        </a>
+                                    </>
+                                )}
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -99,7 +114,7 @@ export default function Address() {
                                 </div>
                             </div>
                         </div>
-                        <div className="pt-4 border-t border-gray-100 flex gap-3">
+                        {/* <div className="pt-4 border-t border-gray-100 flex gap-3">
                             <a
                                 href={waLink}
                                 target="_blank"
@@ -115,7 +130,7 @@ export default function Address() {
                             >
                                 <i className="fa-brands fa-facebook-f text-sm"></i>
                             </a>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* Map */}

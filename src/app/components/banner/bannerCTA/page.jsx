@@ -8,6 +8,7 @@ export default function BannerCTA() {
     const companyData = response?.data || [];
 
     const telephonePerusahaan = companyData?.telephone;
+    const telephoneKedua = companyData?.secondTelephone;
 
     // Format nomor telephone ke format wa.me (62xxxxxxxxxx, tanpa strip/spasi)
     const formatWhatsAppNumber = (phone) => {
@@ -27,6 +28,8 @@ export default function BannerCTA() {
 
     const waNumber = formatWhatsAppNumber(telephonePerusahaan);
     const waLink = `https://wa.me/${waNumber}`;
+    const waNumber2 = formatWhatsAppNumber(telephoneKedua);
+    const waLink2 = `https://wa.me/${waNumber2}`;
     return (
         <>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,8 +68,20 @@ export default function BannerCTA() {
                                 target="_blank"
                                 className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm sm:text-base"
                             >
-                                <i className="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat via WhatsApp
+                                <i className="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat via Admin 1ad
                             </a>
+                            {telephoneKedua && (
+                                <>
+                                    <a
+                                        href={waLink2}
+                                        target="_blank"
+                                        className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm sm:text-base"
+                                    >
+                                        <i className="fa-brands fa-whatsapp text-green-500 text-lg"></i> Chat via Admin
+                                        2
+                                    </a>
+                                </>
+                            )}
                         </div>
                     </div>
                 </div>

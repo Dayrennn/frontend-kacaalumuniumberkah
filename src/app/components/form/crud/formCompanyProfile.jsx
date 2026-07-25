@@ -10,6 +10,7 @@ export default function CompanyProfileForm({ companyData, onSuccess }) {
     const [formData, setFormData] = useState(() => ({
         namaPerusahaan: companyData?.namaPerusahaan || '',
         telephone: companyData?.telephone || '',
+        telephoneKedua: companyData?.secondTelephone || '',
         deskripsiPerusahaan: companyData?.deskripsiPerusahaan || '',
         lokasi: companyData?.lokasi || '',
         jadwal: companyData?.jadwal || '',
@@ -28,7 +29,13 @@ export default function CompanyProfileForm({ companyData, onSuccess }) {
         setErrorMsg('');
 
         try {
-            const result = await updateCompany(formData).unwrap();
+            // API menyimpan field ini sebagai "secondTelephone" (lihat respons GET company),
+            // sedangkan di form kita pakai nama "telephoneKedua" biar konsisten dgn "telephone".
+            // Jadi perlu di-mapping dulu sebelum dikirim.
+            const { telephoneKedua, ...rest } = formData;
+            const payload = { ...rest, secondTelephone: telephoneKedua };
+
+            const result = await updateCompany(payload).unwrap();
             onSuccess?.(result);
         } catch (err) {
             setErrorMsg(err?.data?.message || 'Gagal menyimpan data perusahaan.');
@@ -79,6 +86,22 @@ export default function CompanyProfileForm({ companyData, onSuccess }) {
                             placeholder="021-5551234"
                             className="w-full px-3 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
                             required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="flex items-center gap-2 text-sm font-semibold text-gray-800 mb-2">
+                            <Phone className="w-4 h-4 text-green-600" />
+                            Telephone Kedua
+                            <span className="text-xs font-normal text-gray-400">(opsional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="telephoneKedua"
+                            value={formData.telephoneKedua}
+                            onChange={handleChange}
+                            placeholder="021-5551234 (opsional)"
+                            className="w-full px-3 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
                         />
                     </div>
 

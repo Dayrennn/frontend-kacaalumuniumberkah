@@ -11,6 +11,7 @@ export default function Footer() {
     const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const lokasiPerusahaan = companyData?.lokasi;
     const telephonePerusahaan = companyData?.telephone;
+    const telephoneKedua = companyData?.secondTelephone;
     const emailPerusahaan = companyData?.email;
 
     const formatWhatsAppNumber = (phone) => {
@@ -30,6 +31,8 @@ export default function Footer() {
 
     const waNumber = formatWhatsAppNumber(telephonePerusahaan);
     const waLink = `https://wa.me/${waNumber}`;
+    const waNumber2 = formatWhatsAppNumber(telephoneKedua);
+    const waLink2 = `https://wa.me/${waNumber2}`;
 
     const namaWords = namaPerusahaan.trim().split(' ');
     const lastWord = namaWords[namaWords.length - 1];
@@ -128,6 +131,13 @@ export default function Footer() {
                                 <a href={waLink} className="hover:text-white transition-colors">
                                     {telephonePerusahaan}
                                 </a>
+                                {telephoneKedua && (
+                                    <>
+                                        <a href={waLink2} className="hover:text-white transition-colors">
+                                            {telephoneKedua}
+                                        </a>
+                                    </>
+                                )}
                             </li>
                             <li className="flex items-center gap-3">
                                 <i className="fa-solid fa-envelope text-blue-400 flex-shrink-0"></i>
