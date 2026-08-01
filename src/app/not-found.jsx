@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 export default function NotFound() {
     return (
@@ -17,21 +17,21 @@ export default function NotFound() {
                             <path
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                                d="M9.75 17L3 10.25l6.75-6.75M14.25 7L21 13.75 14.25 20.5"
+                                d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9 9 4.03 9 9z"
                             />
                         </svg>
                     </div>
                 </div>
 
                 <span className="rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-1 text-sm font-medium text-blue-400">
-                    Feature Preview
+                    404 Error
                 </span>
 
-                <h1 className="mt-6 text-4xl font-bold tracking-tight text-white">Sedang Dalam Pengembangan</h1>
+                <h1 className="mt-6 text-4xl font-bold tracking-tight text-white">Halaman Tidak Ditemukan</h1>
 
                 <p className="mt-4 text-slate-400 leading-7">
-                    Fitur ini masih dalam proses pengembangan. Kami sedang mempersiapkan pengalaman terbaik agar dapat
-                    segera digunakan.
+                    Maaf, halaman yang Anda cari tidak ditemukan. Mungkin sudah dipindahkan, dihapus, atau URL yang Anda
+                    masukkan salah.
                 </p>
 
                 <div className="mt-10 flex justify-center gap-4">
@@ -39,7 +39,7 @@ export default function NotFound() {
                         href="/"
                         className="rounded-xl bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
                     >
-                        Home
+                        Kembali ke Home
                     </Link>
                 </div>
             </div>
