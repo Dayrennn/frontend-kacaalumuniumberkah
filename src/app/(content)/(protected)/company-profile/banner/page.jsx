@@ -6,7 +6,7 @@ import { Loader2 } from 'lucide-react';
 import { useSeeAllBannerQuery } from '@/hooks/api/companySliceAPI';
 import BannerForm from '@/app/components/form/crud/formBanner';
 
-export default function bannerPage() {
+export default function BannerPage() {
     const { data: responseBanner, isLoading, isError } = useSeeAllBannerQuery();
     const bannerData = responseBanner?.data || [];
 
