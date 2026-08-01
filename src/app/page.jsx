@@ -1,5 +1,8 @@
 'use client';
 
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import Navbar from './components/page/navbar/page';
 import HeroBanner from './components/banner/hero/page';
@@ -13,6 +16,15 @@ import HomeSkeleton from './components/skeleton/homeSkeleton';
 import './page.css';
 
 export default function Home() {
+    useEffect(() => {
+        AOS.init({
+            duration: 700,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: true,
+        });
+    }, []);
+
     const { isLoading } = useSeeAllCompanyQuery();
 
     if (isLoading) {
@@ -33,23 +45,23 @@ export default function Home() {
                     <HeroBanner />
                 </section>
 
-                <section id="about" className="py-24 bg-white">
+                <section id="about" className="py-24 bg-white" data-aos="fade-up">
                     <About />
                 </section>
 
-                <section id="products" className="py-24 bg-gray-50">
+                <section id="products" className="py-24 bg-gray-50" data-aos="fade-up">
                     <Produk />
                 </section>
 
-                <section id="benefit" className="py-24 bg-white">
+                <section id="benefit" className="py-24 bg-white" data-aos="fade-up">
                     <Keuntungan />
                 </section>
 
-                <section id="address" className="py-24 bg-gray-50">
+                <section id="address" className="py-24 bg-gray-50" data-aos="fade-up">
                     <Address />
                 </section>
 
-                <section id="contact" className="py-20">
+                <section id="contact" className="py-20" data-aos="fade-up">
                     <BannerCTA />
                 </section>
 
