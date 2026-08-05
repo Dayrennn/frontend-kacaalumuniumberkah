@@ -1,6 +1,7 @@
 'use client';
 
-import { Package, AlertTriangle, ArrowDownToLine, ArrowUpFromLine, TrendingUp } from 'lucide-react';
+import { Package, AlertTriangle, ArrowDownToLine, ArrowUpFromLine, TrendingUp, Printer } from 'lucide-react';
+import { useLazyPriontLaporanGabunganQuery } from '@/hooks/api/laporanSliceAPI';
 import StatCard from '@/app/components/card/statsCard';
 import {
     useTotalBarangQuery,
@@ -40,6 +41,35 @@ export default function DashboardAdmin() {
     const { data: keluar, isLoading: keluarLoading, isError: keluarError } = useBarangKeluarHariIniQuery();
     const stokKeluar = keluar?.data?.summary ?? {};
     const mutasiKeluar = keluar?.data?.mutasi ?? [];
+
+    const [triggerCetakPDF] = useLazyPriontLaporanGabunganQuery();
+
+    const getTodayDateString = () => {
+        const now = new Date();
+        const yyyy = now.getFullYear();
+        const mm = String(now.getMonth() + 1).padStart(2, '0');
+        const dd = String(now.getDate()).padStart(2, '0');
+        return `${yyyy}-${mm}-${dd}`;
+    };
+
+    const handleCetakPDF = async () => {
+        try {
+            const today = getTodayDateString();
+
+            const blob = await triggerCetakPDF({
+                startDate: today,
+                endDate: today,
+                judul: 'STOK KACA LEGOK',
+            }).unwrap();
+
+            const url = window.URL.createObjectURL(blob);
+            window.open(url, '_blank');
+
+            setTimeout(() => window.URL.revokeObjectURL(url), 10000);
+        } catch (err) {
+            console.error('Gagal cetak PDF:', err);
+        }
+    };
 
     const aktivitasTerbaru = [...mutasiMasuk, ...mutasiKeluar]
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
@@ -84,7 +114,13 @@ export default function DashboardAdmin() {
                             <TrendingUp className="w-4 h-4 text-blue-600" />
                             <h2 className="font-bold text-gray-900 text-sm">Aktivitas Terbaru</h2>
                         </div>
-                        <button className="text-xs font-semibold text-blue-600 hover:text-blue-700">Lihat Semua</button>
+                        <button
+                            className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 transition-colors text-gray-700 text-sm font-semibold px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm"
+                            onClick={handleCetakPDF}
+                        >
+                            <Printer className="w-4 h-4" />
+                            Cetak Laporan PDF
+                        </button>
                     </div>
 
                     <div className="overflow-x-auto">
@@ -139,9 +175,7 @@ export default function DashboardAdmin() {
                                         <td className="px-5 py-3">
                                             <TipeBadge tipe={row.tipe === 'Masuk' ? 'masuk' : 'keluar'} />
                                         </td>
-                                        <td className="px-5 py-3 text-gray-500">
-                                            {row.barang?.jenisPenjualan}
-                                        </td>
+                                        <td className="px-5 py-3 text-gray-500">{row.barang?.jenisPenjualan}</td>
                                         <td className="px-5 py-3 text-gray-700">{row.jumlah}</td>
                                         <td className="px-5 py-3 text-gray-400">
                                             {new Date(row.createdAt).toLocaleDateString('id-ID', {

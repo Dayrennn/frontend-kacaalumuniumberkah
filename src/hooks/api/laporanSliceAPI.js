@@ -34,7 +34,22 @@ export const laporanAPI = createApi({
                 };
             },
         }),
+        priontLaporanGabungan: builder.query({
+            query: ({ startDate, endDate, judul }) => {
+                const params = new URLSearchParams();
+                if (startDate) params.append('startDate', startDate);
+                if (endDate) params.append('endDate', endDate);
+                if (judul) params.append('judul', judul);
+
+                return {
+                    url: `/laporan/gabungan/pdf?${params.toString()}`,
+                    method: 'GET',
+                    responseHandler: (response) => response.blob(),
+                };
+            },
+        }),
     }),
 });
 
-export const { useLazyPrintLaporanKeluarQuery, useLazyPrintLaporanMasukQuery } = laporanAPI;
+export const { useLazyPrintLaporanKeluarQuery, useLazyPrintLaporanMasukQuery, useLazyPriontLaporanGabunganQuery } =
+    laporanAPI;
