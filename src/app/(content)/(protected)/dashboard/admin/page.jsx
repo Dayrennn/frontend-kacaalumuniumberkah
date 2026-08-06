@@ -9,6 +9,7 @@ import {
     useBarangKeluarHariIniQuery,
     useBarangMasukHariIniQuery,
 } from '@/hooks/api/dashboardSliceAPI';
+import AktivitasTerbaru from '@/app/components/card/AktivitasTerbaru';
 
 const BATAS_STOK_TIPIS = 15;
 
@@ -34,11 +35,11 @@ export default function DashboardAdmin() {
     const stokTipisSummary = stok?.data?.summary ?? {};
     const stokTipisList = stok?.data?.barang ?? [];
 
-    const { data: masuk, isLoading: masukLoading, isError: masukError } = useBarangMasukHariIniQuery();
+    const { data: masuk, isLoading: loadingMasuk, isError: errorMasuk } = useBarangMasukHariIniQuery();
     const stokMasuk = masuk?.data?.summary ?? {};
     const mutasiMasuk = masuk?.data?.mutasi ?? [];
 
-    const { data: keluar, isLoading: keluarLoading, isError: keluarError } = useBarangKeluarHariIniQuery();
+    const { data: keluar, isLoading: loadingKeluar, isError: errorKeluar } = useBarangKeluarHariIniQuery();
     const stokKeluar = keluar?.data?.summary ?? {};
     const mutasiKeluar = keluar?.data?.mutasi ?? [];
 
@@ -71,7 +72,7 @@ export default function DashboardAdmin() {
         }
     };
 
-    const aktivitasTerbaru = [...mutasiMasuk, ...mutasiKeluar]
+    const progressTerbaru = [...mutasiMasuk, ...mutasiKeluar]
         .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
         .slice(0, 5);
 
@@ -108,88 +109,14 @@ export default function DashboardAdmin() {
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Aktivitas terbaru */}
-                <div className="lg:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                    <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
-                        <div className="flex items-center gap-2">
-                            <TrendingUp className="w-4 h-4 text-blue-600" />
-                            <h2 className="font-bold text-gray-900 text-sm">Aktivitas Terbaru</h2>
-                        </div>
-                        <button
-                            className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 transition-colors text-gray-700 text-sm font-semibold px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm"
-                            onClick={handleCetakPDF}
-                        >
-                            <Printer className="w-4 h-4" />
-                            Cetak Laporan PDF
-                        </button>
-                    </div>
-
-                    <div className="overflow-x-auto">
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="text-left text-gray-400 text-xs uppercase tracking-wide">
-                                    <th className="px-5 py-3 font-semibold">Barang</th>
-                                    <th className="px-5 py-3 font-semibold">Kategori</th>
-                                    <th className="px-5 py-3 font-semibold">Tipe</th>
-                                    <th className="px-5 py-3 font-semibold">Jenis Penjualan</th>
-                                    <th className="px-5 py-3 font-semibold">Jumlah</th>
-                                    <th className="px-5 py-3 font-semibold">Tanggal</th>
-                                </tr>
-                            </thead>
-                            <tbody className="divide-y divide-gray-50">
-                                {(masukLoading || keluarLoading) && (
-                                    <tr>
-                                        <td colSpan={5} className="px-5 py-4 text-center text-gray-400">
-                                            Memuat aktivitas...
-                                        </td>
-                                    </tr>
-                                )}
-
-                                {(masukError || keluarError) && !masukLoading && !keluarLoading && (
-                                    <tr>
-                                        <td colSpan={5} className="px-5 py-4 text-center text-red-500">
-                                            Gagal memuat data aktivitas.
-                                        </td>
-                                    </tr>
-                                )}
-
-                                {!masukLoading &&
-                                    !keluarLoading &&
-                                    !masukError &&
-                                    !keluarError &&
-                                    aktivitasTerbaru.length === 0 && (
-                                        <tr>
-                                            <td colSpan={5} className="px-5 py-4 text-center text-gray-400">
-                                                Belum ada aktivitas hari ini
-                                            </td>
-                                        </tr>
-                                    )}
-
-                                {aktivitasTerbaru.map((row) => (
-                                    <tr key={row.id} className="hover:bg-gray-50/60 transition-colors">
-                                        <td className="px-5 py-3 font-medium text-gray-900">
-                                            {row.barang?.namaBarang}
-                                        </td>
-                                        <td className="px-5 py-3 text-gray-500">
-                                            {row.barang?.kategori?.namaKategori}
-                                        </td>
-                                        <td className="px-5 py-3">
-                                            <TipeBadge tipe={row.tipe === 'Masuk' ? 'masuk' : 'keluar'} />
-                                        </td>
-                                        <td className="px-5 py-3 text-gray-500">{row.barang?.jenisPenjualan}</td>
-                                        <td className="px-5 py-3 text-gray-700">{row.jumlah}</td>
-                                        <td className="px-5 py-3 text-gray-400">
-                                            {new Date(row.createdAt).toLocaleDateString('id-ID', {
-                                                day: '2-digit',
-                                                month: 'short',
-                                                year: 'numeric',
-                                            })}
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                <AktivitasTerbaru
+                    cetakPDF={handleCetakPDF}
+                    masukLoading={loadingMasuk}
+                    masukError={errorMasuk}
+                    keluarError={errorKeluar}
+                    keluarLoading={loadingKeluar}
+                    terbaru={progressTerbaru}
+                />
 
                 {/* Stok menipis */}
                 <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">

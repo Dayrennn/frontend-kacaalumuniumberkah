@@ -21,15 +21,23 @@ export default function DataBarang() {
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);
-
-    const { data: response, isLoading, isError } = useSeeAllBarangQuery();
-    const barangList = response?.data?.barang ?? [];
-
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
     const [keyword, setKeyword] = useState('');
 
-    const filtered = keyword.trim()
-        ? barangList.filter((item) => item.namaBarang.toLowerCase().includes(keyword.toLowerCase()))
-        : barangList;
+    const { data: response, isLoading, isError } = useSeeAllBarangQuery({ page, limit: pageSize, search: keyword });
+    const barangList = response?.data?.barang ?? [];
+
+    const handleKeywordChange = (e) => {
+        setKeyword(e.target.value);
+        setPage(1);
+    };
+
+    const pagination = response?.data?.summary ?? { page: 1, limit: 10, total: 0, totalPages: 1 };
+
+    // const filtered = keyword.trim()
+    //     ? barangList.filter((item) => item.namaBarang.toLowerCase().includes(keyword.toLowerCase()))
+    //     : barangList;
 
     const summary = response?.data?.summary ?? { totalBarang: 0, barangAktif: 0, barangNonaktif: 0 };
 
@@ -86,7 +94,7 @@ export default function DataBarang() {
                         <input
                             type="text"
                             value={keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
+                            onChange={handleKeywordChange}
                             placeholder="Cari nama barang..."
                             className="pl-9 pr-3 py-2 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 w-56"
                         />
@@ -127,7 +135,7 @@ export default function DataBarang() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-50">
-                                {filtered.map((item, idx) => (
+                                {barangList.map((item, idx) => (
                                     <tr key={item.id} className="hover:bg-gray-50/60 transition-colors">
                                         <td className="px-5 py-3 text-gray-400">{idx + 1}</td>
                                         <td className="px-5 py-3 font-medium text-gray-900">{item.namaBarang}</td>
@@ -165,7 +173,7 @@ export default function DataBarang() {
                                     </tr>
                                 ))}
 
-                                {filtered.length === 0 && (
+                                {barangList.length === 0 && (
                                     <tr>
                                         <td colSpan={8} className="px-5 py-10 text-center text-gray-400 text-sm">
                                             Barang tidak ditemukan.
@@ -174,6 +182,31 @@ export default function DataBarang() {
                                 )}
                             </tbody>
                         </table>
+                    </div>
+                )}
+                {!isLoading && !isError && pagination.totalPages > 1 && (
+                    <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100 flex-wrap gap-3">
+                        <p className="text-xs text-gray-500">
+                            Halaman {pagination.page} dari {pagination.totalPages} &middot; Total {pagination.total}{' '}
+                            barang
+                        </p>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                                disabled={page <= 1}
+                                className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+                            >
+                                Sebelumnya
+                            </button>
+                            <span className="text-sm text-gray-700 px-2">{page}</span>
+                            <button
+                                onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
+                                disabled={page >= pagination.totalPages}
+                                className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+                            >
+                                Berikutnya
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>

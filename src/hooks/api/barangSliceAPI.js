@@ -26,7 +26,8 @@ export const barangAPI = createApi({
             },
         }),
         seeAllBarang: builder.query({
-            query: () => '/barang',
+            query: ({ page = 1, limit = 10, search = '' } = {}) =>
+                `/barang?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`,
             providesTags: ['barangAPI'],
         }),
         modifyBarang: builder.mutation({
