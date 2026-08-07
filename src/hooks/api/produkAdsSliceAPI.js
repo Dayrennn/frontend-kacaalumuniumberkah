@@ -17,7 +17,8 @@ export const adsAPI = createApi({
             invalidatesTags: ['adsAPI'],
         }),
         seeAllProdukAds: builder.query({
-            query: ({ page = 1, limit = 10 } = {}) => `/produk-ads?page=${page}&limit=${limit}`,
+            query: ({ page = 1, limit = 10, search = '' } = {}) =>
+                `/produk-ads?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`,
             providesTags: ['adsAPI'],
         }),
         modifyProdukAds: builder.mutation({

@@ -17,28 +17,39 @@ export default function DataProduk() {
     const [showModalTambah, setShowModalTambah] = useState(false);
     const [showModalEdit, setShowModalEdit] = useState(false);
     const [showModalHapus, setShowModalHapus] = useState(false);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
 
     const [deleteAds] = useRemoveProdukAdsMutation();
 
-    const { data: ads, isLoading, isError } = useSeeAllProdukAdsQuery();
-    const produkList = ads?.data || [];
+    const { data: ads, isLoading, isError } = useSeeAllProdukAdsQuery({
+        page,
+        limit: pageSize,
+        search: keyword,
+    });
+
+    const produkList = ads?.data ?? [];
+    const pagination = ads?.meta ?? { page: 1, limit: pageSize, total: 0, totalPages: 1 };
+
+    const handleKeywordChange = (e) => {
+        setKeyword(e.target.value);
+        setPage(1); // reset ke halaman 1 tiap kali search berubah
+    };
 
     const daftarKategori = [
         'Semua',
         ...new Set(
-            produkList.map((item) => item.barang?.kategori?.namaKategori).filter(Boolean), // buang undefined/null biar tidak jadi opsi kosong
+            produkList.map((item) => item.barang?.kategori?.namaKategori).filter(Boolean),
         ),
     ];
 
-    const filtered = produkList.filter((item) => {
-        const namaBarang = item.barang?.namaBarang || '';
-        const cocokKeyword = keyword.trim() ? namaBarang.toLowerCase().includes(keyword.toLowerCase()) : true;
-        const cocokKategori =
-            kategoriFilter === 'Semua' ? true : item.barang?.kategori?.namaKategori === kategoriFilter;
-        return cocokKeyword && cocokKategori;
-    });
+    // filter kategori tetap di frontend (kalau backend belum support filter kategori)
+    const filtered =
+        kategoriFilter === 'Semua'
+            ? produkList
+            : produkList.filter((item) => item.barang?.kategori?.namaKategori === kategoriFilter);
 
-    const totalProduk = produkList.length;
+    const totalProduk = pagination.total ?? produkList.length;
     const totalKategori = new Set(produkList.map((item) => item.barang?.kategori?.namaKategori)).size;
 
     const [selectedBarang, setSelectedBarang] = useState(null);
@@ -108,7 +119,7 @@ export default function DataProduk() {
                             <input
                                 type="text"
                                 value={keyword}
-                                onChange={(e) => setKeyword(e.target.value)}
+                                onChange={handleKeywordChange}
                                 placeholder="Cari nama produk..."
                                 className="pl-9 pr-3 py-2 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400 w-56"
                             />
@@ -144,6 +155,32 @@ export default function DataProduk() {
                         ) : (
                             <div className="px-5 py-14 text-center text-gray-400 text-sm">Produk tidak ditemukan.</div>
                         )}
+                    </div>
+                )}
+
+                {!isLoading && !isError && pagination.totalPages > 1 && (
+                    <div className="flex items-center justify-between px-5 py-4 border-t border-gray-100 flex-wrap gap-3">
+                        <p className="text-xs text-gray-500">
+                            Halaman {pagination.page} dari {pagination.totalPages} &middot; Total {pagination.total}{' '}
+                            produk
+                        </p>
+                        <div className="flex items-center gap-2">
+                            <button
+                                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                                disabled={page <= 1}
+                                className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+                            >
+                                Sebelumnya
+                            </button>
+                            <span className="text-sm text-gray-700 px-2">{page}</span>
+                            <button
+                                onClick={() => setPage((p) => Math.min(pagination.totalPages, p + 1))}
+                                disabled={page >= pagination.totalPages}
+                                className="px-3 py-1.5 text-sm rounded-lg border border-gray-200 text-gray-600 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-gray-50"
+                            >
+                                Berikutnya
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
