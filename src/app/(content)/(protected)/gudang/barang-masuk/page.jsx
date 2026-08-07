@@ -111,7 +111,7 @@ export default function DataBarangMasuk() {
                         onClick={handleCetakPDF}
                     >
                         <Printer className="w-4 h-4" />
-                        Cetak Laporan PDF
+                        Cetak Laporan
                     </button>
                     <button
                         className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm"

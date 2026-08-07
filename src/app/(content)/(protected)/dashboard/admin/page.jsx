@@ -13,20 +13,6 @@ import AktivitasTerbaru from '@/app/components/card/AktivitasTerbaru';
 
 const BATAS_STOK_TIPIS = 15;
 
-function TipeBadge({ tipe }) {
-    const isMasuk = tipe === 'masuk';
-    return (
-        <span
-            className={`inline-flex items-center gap-1 text-xs font-semibold px-2.5 py-1 rounded-full ${
-                isMasuk ? 'bg-green-50 text-green-700' : 'bg-orange-50 text-orange-700'
-            }`}
-        >
-            {isMasuk ? <ArrowDownToLine className="w-3 h-3" /> : <ArrowUpFromLine className="w-3 h-3" />}
-            {isMasuk ? 'Masuk' : 'Keluar'}
-        </span>
-    );
-}
-
 export default function DashboardAdmin() {
     const { data: total, isLoading: totalLoading, isError: totalError } = useTotalBarangQuery();
     const barang = total?.data?.summary ?? {};

@@ -29,7 +29,7 @@ export default function AktivitasTerbaru({ terbaru, cetakPDF, masukLoading, masu
                     onClick={cetakPDF}
                 >
                     <Printer className="w-4 h-4" />
-                    Cetak Laporan PDF
+                    Cetak Laporan
                 </button>
             </div>
 
