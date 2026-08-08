@@ -106,13 +106,13 @@ export default function DataBarangKeluar() {
                     <p className="text-gray-500 text-sm mt-1">Riwayat pengeluaran stok barang</p>
                 </div>
                 <div className="flex items-center gap-2">
-                    <button
+                    {/* <button
                         className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 transition-colors text-gray-700 text-sm font-semibold px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm"
                         onClick={handleCetakPDF}
                     >
                         <Printer className="w-4 h-4" />
                         Cetak Laporan
-                    </button>
+                    </button> */}
                     <button
                         className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 transition-colors text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm"
                         onClick={() => setShowModalTambah(true)}

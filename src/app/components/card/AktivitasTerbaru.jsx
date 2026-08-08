@@ -24,13 +24,13 @@ export default function AktivitasTerbaru({ terbaru, cetakPDF, masukLoading, masu
                     <TrendingUp className="w-4 h-4 text-blue-600" />
                     <h2 className="font-bold text-gray-900 text-sm">Aktivitas Terbaru</h2>
                 </div>
-                <button
+                {/* <button
                     className="inline-flex items-center gap-2 bg-white hover:bg-gray-50 transition-colors text-gray-700 text-sm font-semibold px-4 py-2.5 rounded-xl border border-gray-200 shadow-sm"
                     onClick={cetakPDF}
                 >
                     <Printer className="w-4 h-4" />
                     Cetak Laporan
-                </button>
+                </button> */}
             </div>
 
             <div className="overflow-x-auto">

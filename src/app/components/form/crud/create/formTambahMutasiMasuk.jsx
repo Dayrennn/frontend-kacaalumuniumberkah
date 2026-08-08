@@ -11,6 +11,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
     const [jumlah, setJumlah] = useState(0);
     const [keterangan, setKeterangan] = useState('');
     const [suplier, setSuplier] = useState('');
+    const [ totalHarga, setTotalHarga ] = useState(0);
 
     const handleCreate = async (e) => {
         e.preventDefault();
@@ -21,6 +22,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
                     jumlah: Number(jumlah),
                     keterangan,
                     suplier,
+                    totalHarga: Number(totalHarga),
                 },
             }).unwrap();
 
@@ -28,6 +30,7 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
             setJumlah('');
             setKeterangan('');
             setSuplier('');
+            setTotalHarga(0);
 
             if (onSuccess) {
                 onSuccess(result);
@@ -71,6 +74,18 @@ export default function FormTambahBarangMasuk({ onCancel, onSuccess }) {
                         value={jumlah}
                         onChange={(e) => setJumlah(e.target.value)}
                         placeholder="Contoh: 400"
+                        autoFocus
+                        className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
+                    />
+                </div>
+
+                <div>
+                    <label className="block text-xs font-semibold text-gray-500 mb-1.5">Harga</label>
+                    <input
+                        type="number"
+                        value={totalHarga}
+                        onChange={(e) => setTotalHarga(e.target.value)}
+                        placeholder="Rp. 100000"
                         autoFocus
                         className="w-full px-3.5 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-100 focus:border-blue-400"
                     />

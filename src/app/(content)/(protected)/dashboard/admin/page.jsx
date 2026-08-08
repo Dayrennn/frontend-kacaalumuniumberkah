@@ -125,7 +125,7 @@ export default function DashboardAdmin() {
                                 <div key={item.id}>
                                     <div className="flex items-center justify-between mb-1">
                                         <p className="text-sm font-medium text-gray-700 truncate pr-2">
-                                            {item.namaBarang}
+                                            {item.namaBarang} - {item.ukuran}
                                         </p>
                                         <p className="text-xs font-semibold text-red-500 shrink-0">
                                             {item.jumlahBarang}/{BATAS_STOK_TIPIS}
