@@ -4,6 +4,7 @@ import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import { useSeeAllBannerQuery } from '@/hooks/api/companySliceAPI';
 import Image from 'next/image';
 import { BoxOpen, ChevronDown, Headset } from 'lucide-react';
+import { FaBoxOpen } from 'react-icons/fa';
 
 export default function HeroBanner() {
     const { data: response } = useSeeAllCompanyQuery();
@@ -42,7 +43,7 @@ export default function HeroBanner() {
                             href="#products"
                             className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
                         >
-                            <BoxOpen className="w-4 h-4" /> Lihat Produk
+                            <FaBoxOpen className="w-4 h-4" /> Lihat Produk
                         </a>
                         <a
                             href="#contact"

@@ -69,7 +69,7 @@ export default function BannerCTA() {
                                 target="_blank"
                                 className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-8 py-4 rounded-xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all text-sm sm:text-base"
                             >
-                                <WhatsAppIcon className="w-5 h-5" /> Chat via Admin 2
+                                <WhatsAppIcon className="w-5 h-5" /> Chat via Admin 1
                             </a>
                             {telephoneKedua && (
                                 <>
