@@ -3,6 +3,8 @@
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import { useSeeAllKategoriQuery } from '@/hooks/api/kategoriSliceAPI';
 import { useState } from 'react';
+import { Mail, MapPin, Phone } from 'lucide-react';
+import { FaFacebookF, FaWhatsapp } from 'react-icons/fa6';
 
 export default function Footer() {
     const { data: response } = useSeeAllCompanyQuery();
@@ -63,15 +65,15 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-3">
                             {[
-                                ['fa-whatsapp', 'hover:bg-green-600'],
-                                ['fa-facebook-f', 'hover:bg-blue-700'],
-                            ].map(([icon, hover]) => (
+                                [FaWhatsapp, 'hover:bg-green-600'],
+                                [FaFacebookF, 'hover:bg-blue-700'],
+                            ].map(([Icon, hover]) => (
                                 <a
-                                    key={icon}
+                                    key={hover}
                                     href="#address"
                                     className={`w-9 h-9 bg-gray-800 rounded-lg flex items-center justify-center ${hover} transition-colors`}
                                 >
-                                    <i className={`fa-brands ${icon} text-sm`}></i>
+                                    <Icon className="w-4 h-4" />
                                 </a>
                             ))}
                         </div>
@@ -123,11 +125,11 @@ export default function Footer() {
                         <h5 className="text-white font-bold text-sm mb-5 uppercase tracking-widest">Contact</h5>
                         <ul className="space-y-4 text-sm">
                             <li className="flex items-start gap-3">
-                                <i className="fa-solid fa-location-dot text-blue-400 mt-0.5 flex-shrink-0"></i>
+                                <MapPin className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
                                 <span>{lokasiPerusahaan}</span>
                             </li>
                             <li className="flex items-center gap-3">
-                                <i className="fa-solid fa-phone text-blue-400 flex-shrink-0"></i>
+                                <Phone className="w-5 h-5 text-blue-400 flex-shrink-0" />
                                 <a href={waLink} className="hover:text-white transition-colors">
                                     {telephonePerusahaan}
                                 </a>
@@ -140,7 +142,7 @@ export default function Footer() {
                                 )}
                             </li>
                             <li className="flex items-center gap-3">
-                                <i className="fa-solid fa-envelope text-blue-400 flex-shrink-0"></i>
+                                <Mail className="w-5 h-5 text-blue-400 flex-shrink-0" />
                                 <a href="mailto:info@buildpro.id" className="hover:text-white transition-colors">
                                     {emailPerusahaan}
                                 </a>

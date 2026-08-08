@@ -3,6 +3,7 @@
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import { useSeeAllBannerQuery } from '@/hooks/api/companySliceAPI';
 import Image from 'next/image';
+import { BoxOpen, ChevronDown, Headset } from 'lucide-react';
 
 export default function HeroBanner() {
     const { data: response } = useSeeAllCompanyQuery();
@@ -41,13 +42,13 @@ export default function HeroBanner() {
                             href="#products"
                             className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
                         >
-                            <i className="fa-solid fa-box-open text-sm"></i> Lihat Produk
+                            <BoxOpen className="w-4 h-4" /> Lihat Produk
                         </a>
                         <a
                             href="#contact"
                             className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl border border-white/30 transition-all"
                         >
-                            <i className="fa-solid fa-headset text-sm"></i> Hubungi Kami
+                            <Headset className="w-4 h-4" /> Hubungi Kami
                         </a>
                     </div>
                 </div>
@@ -56,7 +57,7 @@ export default function HeroBanner() {
             {/* Scroll indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60 bounce-slow">
                 <span className="text-xs font-medium">Scroll Kebawah</span>
-                <i className="fa-solid fa-chevron-down text-sm"></i>
+                <ChevronDown className="w-4 h-4" />
             </div>
         </>
     );

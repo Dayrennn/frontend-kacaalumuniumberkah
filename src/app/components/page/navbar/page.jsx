@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+import { LogIn, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -56,7 +57,7 @@ export default function Navbar() {
                             href="/login"
                             className="hidden md:inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-5 py-2 rounded-lg shadow-sm transition-colors"
                         >
-                            <i className="fa-solid fa-right-to-bracket text-xs"></i> Login
+                            <LogIn className="w-3 h-3" /> Login
                         </a>
                         <button
                             onClick={toggleMenu}
@@ -64,7 +65,7 @@ export default function Navbar() {
                             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
                             aria-label="Toggle menu"
                         >
-                            <i className={`fa-solid ${isOpen ? 'fa-xmark' : 'fa-bars'} text-gray-700 text-lg`}></i>
+                            {isOpen ? <X className="w-5 h-5 text-gray-700" /> : <Menu className="w-5 h-5 text-gray-700" />}
                         </button>
                     </div>
                 </div>

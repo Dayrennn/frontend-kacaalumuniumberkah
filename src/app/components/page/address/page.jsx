@@ -1,6 +1,7 @@
 'use client';
 
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+import { Clock, Mail, MapPin, Phone } from 'lucide-react';
 
 export default function Address() {
     const { data: response } = useSeeAllCompanyQuery();
@@ -55,7 +56,7 @@ export default function Address() {
                         </div>
                         <div className="flex items-start gap-4">
                             <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i className="fa-solid fa-location-dot text-blue-600"></i>
+                                <MapPin className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Alamat</p>
@@ -64,7 +65,7 @@ export default function Address() {
                         </div>
                         <div className="flex items-start gap-4">
                             <div className="w-10 h-10 bg-green-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i className="fa-solid fa-phone text-green-600"></i>
+                                <Phone className="w-5 h-5 text-green-600" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Whatsapp / Telephone</p>
@@ -91,7 +92,7 @@ export default function Address() {
                         </div>
                         <div className="flex items-start gap-4">
                             <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i className="fa-solid fa-envelope text-blue-600"></i>
+                                <Mail className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-0.5">Email</p>
@@ -105,7 +106,7 @@ export default function Address() {
                         </div>
                         <div className="flex items-start gap-4">
                             <div className="w-10 h-10 bg-purple-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                                <i className="fa-solid fa-clock text-purple-600"></i>
+                                <Clock className="w-5 h-5 text-purple-600" />
                             </div>
                             <div>
                                 <p className="font-semibold text-gray-800 text-sm mb-1">Jadwal</p>
@@ -121,14 +122,14 @@ export default function Address() {
                                 className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
                                 aria-label="WhatsApp"
                             >
-                                <i className="fa-brands fa-whatsapp text-sm"></i>
+                                <FaWhatsapp className="w-4 h-4" />
                             </a>
                             <a
                                 href="#"
                                 className="w-9 h-9 bg-blue-50 rounded-xl flex items-center justify-center hover:bg-blue-600 hover:text-white text-blue-600 transition-all"
                                 aria-label="Facebook"
                             >
-                                <i className="fa-brands fa-facebook-f text-sm"></i>
+                                <FaFacebookF className="w-4 h-4" />
                             </a>
                         </div> */}
                     </div>

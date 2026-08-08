@@ -1,3 +1,5 @@
+import { Award, CircleDollarSign, Star, Warehouse, Zap } from 'lucide-react';
+
 export default function Keuntungan() {
     return (
         <>
@@ -18,35 +20,35 @@ export default function Keuntungan() {
                     {[
                         {
                             bg: 'bg-blue-100',
-                            icon: 'fa-bolt',
+                            Icon: Zap,
                             color: 'text-blue-600',
                             title: 'Fast Response',
                             desc: 'Tim admin kami merespons pesan dengan cepat selama jam kerja.',
                         },
                         {
                             bg: 'bg-green-100',
-                            icon: 'fa-warehouse',
+                            Icon: Warehouse,
                             color: 'text-green-600',
                             title: 'Stok Banyak',
                             desc: 'Gudang seluas 2.500 m² dengan lebih dari 500 SKU selalu siap untuk dibeli langsung atau untuk pesanan B2B.',
                         },
                         {
                             bg: 'bg-yellow-100',
-                            icon: 'fa-award',
+                            Icon: Award,
                             color: 'text-yellow-600',
                             title: 'Supplier Terpercaya',
                             desc: 'Mitra resmi dan distributor resmi untuk merek-merek nasional terkemuka.',
                         },
                         {
                             bg: 'bg-pink-100',
-                            icon: 'fa-circle-dollar-to-slot',
+                            Icon: CircleDollarSign,
                             color: 'text-pink-600',
                             title: 'Harga Terjangkau',
                             desc: 'Harga ritel dan grosir yang kompetitif dengan diskon bertingkat untuk pembelian besar bagi kontraktor.',
                         },
                         {
                             bg: null,
-                            icon: 'fa-star',
+                            Icon: Star,
                             color: 'text-white',
                             title: 'Jaminan Kualitas',
                             desc: 'Setiap produk dilengkapi garansi pabrik. Barang yang cacat bisa ditukar, tanpa banyak tanya.',
@@ -60,7 +62,7 @@ export default function Keuntungan() {
                             <div
                                 className={`w-12 h-12 ${f.dark ? 'bg-white/20' : f.bg} rounded-xl flex items-center justify-center mb-4`}
                             >
-                                <i className={`fa-solid ${f.icon} ${f.color} text-lg`}></i>
+                                <f.Icon className={`w-5 h-5 ${f.color}`} />
                             </div>
                             <h4 className={`font-bold text-lg mb-2 ${f.dark ? 'text-white' : 'text-gray-900'}`}>
                                 {f.title}

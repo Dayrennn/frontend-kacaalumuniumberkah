@@ -4,6 +4,7 @@ import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import { WhatsAppIcon } from '../../WhatsappIcon';
+import { X } from 'lucide-react';
 
 export default function ProdukModal({ product, onClose }) {
     const { data: response } = useSeeAllCompanyQuery();
@@ -65,7 +66,7 @@ export default function ProdukModal({ product, onClose }) {
                         className="absolute top-3 right-3 w-9 h-9 bg-white/80 hover:bg-white rounded-full flex items-center justify-center shadow-sm transition-all"
                         aria-label="Tutup"
                     >
-                        <i className="fa-solid fa-xmark text-gray-700"></i>
+                        <X className="w-5 h-5 text-gray-700" />
                     </button>
 
                     {product.status && (
