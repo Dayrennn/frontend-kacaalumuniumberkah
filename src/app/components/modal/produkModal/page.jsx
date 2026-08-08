@@ -1,5 +1,7 @@
 'use client';
 
+import { createPortal } from 'react-dom';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 
@@ -11,14 +13,10 @@ export default function ProdukModal({ product, onClose }) {
 
     const formatWhatsAppNumber = (phone) => {
         if (!phone) return '';
-        // Hapus semua karakter selain angka
         let cleaned = phone.replace(/\D/g, '');
-        // Kalau diawali '0', ganti jadi '62'
         if (cleaned.startsWith('0')) {
             cleaned = '62' + cleaned.slice(1);
-        }
-        // Kalau belum diawali '62' sama sekali (misal cuma '8123...'), tambahkan '62'
-        else if (!cleaned.startsWith('62')) {
+        } else if (!cleaned.startsWith('62')) {
             cleaned = '62' + cleaned;
         }
         return cleaned;
@@ -37,9 +35,9 @@ export default function ProdukModal({ product, onClose }) {
           }).format(product.harga)
         : null;
 
-    return (
+    const modalContent = (
         <div
-            className="modal-backdrop fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+            className="modal-backdrop fixed inset-0 z-[999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
             onClick={onClose}
         >
             <div
@@ -126,4 +124,6 @@ export default function ProdukModal({ product, onClose }) {
             </div>
         </div>
     );
+
+    return createPortal(modalContent, document.body);
 }
