@@ -12,6 +12,7 @@ import {
     ChevronLeft,
     ChevronRight,
     Printer,
+    DollarSign,
 } from 'lucide-react';
 import StatCard from '@/app/components/card/statsCard';
 import ModalTambah from '@/app/components/modal/modal-crud/modalTambah';
@@ -51,6 +52,7 @@ export default function DataBarangMasuk() {
 
     const totalJumlahMasuk = mutasiList.reduce((sum, item) => sum + item.jumlah, 0);
     const totalBarangUnik = new Set(mutasiList.map((item) => item.barangId)).size;
+    const totalPengeluaran = mutasiList.reduce((sum, item) => sum + item.totalHarga, 0);
 
     const handleResetTanggal = () => {
         setStartDate('');
@@ -132,6 +134,7 @@ export default function DataBarangMasuk() {
                     tone="green"
                 />
                 <StatCard icon={Package} label="Jenis Barang (Halaman Ini)" value={totalBarangUnik} tone="amber" />
+                <StatCard icon={DollarSign} label="Total Pembelian" value={totalPengeluaran} tone="green" />
             </div>
 
             {/* Tabel */}
