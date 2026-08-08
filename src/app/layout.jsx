@@ -34,6 +34,10 @@ export const metadata = {
         'toko bahan bangunan caringin',
         'hollow steel tangerang',
         'gypsum board',
+        'plavon pvc',
+        'pvc',
+        'hollow',
+        'ornamen',
     ],
     authors: [{ name: 'Berkah Kaca Alumunium' }],
     robots: {
@@ -78,7 +82,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html
-            lang="en"
+            lang="id"
             className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} h-full antialiased`}
         >
             <body className="min-h-full flex flex-col">
