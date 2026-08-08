@@ -1,9 +1,9 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
+import { WhatsAppIcon } from '../../WhatsappIcon';
 
 export default function ProdukModal({ product, onClose }) {
     const { data: response } = useSeeAllCompanyQuery();
@@ -111,7 +111,7 @@ export default function ProdukModal({ product, onClose }) {
                             href={waLink}
                             className="flex-1 inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-5 py-3 rounded-xl transition-all text-sm"
                         >
-                            <i className="fa-brands fa-whatsapp text-lg"></i> Tanya Produk Ini
+                            <WhatsAppIcon className="w-5 h-5" /> Tanya Produk Ini
                         </a>
                         <button
                             onClick={onClose}
