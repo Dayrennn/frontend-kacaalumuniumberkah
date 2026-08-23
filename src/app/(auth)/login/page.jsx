@@ -29,7 +29,7 @@ export default function Login() {
 
                 {/* Footer */}
                 <p className="text-center text-xs text-gray-400 mt-6">
-                    &copy; {new Date().getFullYear()} Berkah Kaca Alumunium. Hak cipta dilindungi.
+                    &copy; {new Date().getFullYear()} Kaca Alumunium Berkah. Hak cipta dilindungi.
                 </p>
             </div>
         </div>

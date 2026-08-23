@@ -19,7 +19,7 @@ export default function About() {
                             Mitra Lengkap Anda untuk Bahan Bangunan
                         </h3>
                         <p className="text-gray-500 leading-relaxed mb-4">
-                            Berkah Kaca Alumunium didirikan untuk membuat bahan bangunan berkualitas tinggi dapat
+                            Kaca Alumunium Berkah didirikan untuk membuat bahan bangunan berkualitas tinggi dapat
                             diakses untuk setiap proyek, besar atau kecil. Kami telah berkembang menjadi pemasok layanan
                             lengkap yang mencakup papan gypsum, langit-langit PVC, rangka baja hollow, cat, sekrup, dan
                             berbagai aksesori konstruksi lainnya.

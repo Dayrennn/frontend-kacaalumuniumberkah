@@ -26,7 +26,7 @@ export default function Home() {
                 <section id="Beranda" className="relative min-h-screen flex items-center overflow-hidden pt-16">
                     <Image
                         src="/images/hero.jpg"
-                        alt="Berkah Kaca Alumunium - Distributor Bahan Bangunan"
+                        alt="Kaca Alumunium Berkah - Distributor Bahan Bangunan"
                         fill
                         className="object-cover object-center"
                         priority
@@ -40,9 +40,9 @@ export default function Home() {
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                         <div className="max-w-xl">
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-                                Berkah Kaca
+                                Kaca Alumunium
                                 <br />
-                                <span className="text-blue-300">Alumunium</span>
+                                <span className="text-blue-300">Berkah</span>
                             </h1>
 
                             <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">
@@ -108,7 +108,7 @@ export default function Home() {
                     __html: JSON.stringify({
                         '@context': 'https://schema.org',
                         '@type': 'HomeAndConstructionBusiness',
-                        name: 'Berkah Kaca Alumunium',
+                        name: 'Kaca Alumunium Alumunium',
                         image: 'https://kacaalumuniumberkah.com/images/og-image.jpg',
                         url: 'https://kacaalumuniumberkah.com',
                         telephone: '+62811234567',

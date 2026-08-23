@@ -8,7 +8,7 @@ export default function Keuntungan() {
                     <div className="section-tag mx-auto"></div>
                     <p className="text-blue-600 text-sm font-semibold uppercase tracking-widest mb-2">Keuntungan</p>
                     <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">
-                        Mengapa harus memilih Berkah Kaca Alumunium?
+                        Mengapa harus memilih Kaca Alumunium Berkah?
                     </h2>
                     <p className="text-gray-500 max-w-xl mx-auto text-base">
                         Kami menggabungkan pengetahuan produk yang mendalam, stok besar, dan logistik yang andal untuk

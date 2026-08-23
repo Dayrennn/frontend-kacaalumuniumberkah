@@ -3,7 +3,7 @@ import { ChevronDown, Headset } from 'lucide-react';
 import { FaBoxOpen } from 'react-icons/fa';
 
 export default function HeroBanner() {
-    const namaPerusahaan = 'Berkah Kaca Alumunium';
+    const namaPerusahaan = 'Kaca Alumunium Berkah';
     const deskripsi =
         'Distributor bahan bangunan berkualitas seperti kaca, aluminium, plafon PVC, gypsum, hollow, dan berbagai kebutuhan konstruksi lainnya.';
 
@@ -13,7 +13,7 @@ export default function HeroBanner() {
         <>
             <Image
                 src={image}
-                alt="Berkah Kaca Alumunium - Distributor Bahan Bangunan"
+                alt="Kaca Alumunium Berkah - Distributor Bahan Bangunan"
                 fill
                 className="object-cover object-center"
                 priority
@@ -27,9 +27,9 @@ export default function HeroBanner() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                 <div className="max-w-xl">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-                        Berkah Kaca
+                        Kaca Alumunium
                         <br />
-                        <span className="text-blue-300">Alumunium</span>
+                        <span className="text-blue-300">Berkah</span>
                     </h1>
 
                     <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">{deskripsi}</p>

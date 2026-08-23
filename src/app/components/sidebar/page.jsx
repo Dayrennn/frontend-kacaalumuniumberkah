@@ -69,7 +69,7 @@ export default function Sidebar({ open = true, onClose, isAdmin: isAdminProp = f
                     <div className="flex items-center justify-center w-10 h-10 rounded-2xl bg-blue-600 shadow-lg shadow-blue-200 shrink-0">
                         <Warehouse className="w-5 h-5 text-white" />
                     </div>
-                    <span className="font-extrabold text-gray-900 text-lg">Berkah Kaca Alumunium</span>
+                    <span className="font-extrabold text-gray-900 text-lg">Kaca Alumunium Berkah</span>
                 </div>
 
                 {/* Menu */}
