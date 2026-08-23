@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
 import { LogIn, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
@@ -10,15 +9,6 @@ export default function Navbar() {
     const toggleMenu = () => setIsOpen((prev) => !prev);
     const closeMenu = () => setIsOpen(false);
 
-    const { data: response, isLoading } = useSeeAllCompanyQuery();
-    const companyData = response?.data || [];
-
-    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
-
-    const namaWords = namaPerusahaan.trim().split(' ');
-    const lastWord = namaWords[namaWords.length - 1];
-    const firstWords = namaWords.slice(0, -1).join(' ');
-
     return (
         <>
             <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -26,14 +16,7 @@ export default function Navbar() {
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-2 group">
                         <span className="text-xl font-extrabold text-gray-900">
-                            {isLoading ? (
-                                'Loading...'
-                            ) : (
-                                <>
-                                    {firstWords && `${firstWords} `}
-                                    <span className="text-blue-600">{lastWord}</span>
-                                </>
-                            )}
+                            Berkah Kaca <span className="text-blue-600">Alumunium</span>
                         </span>
                     </a>
 
@@ -65,7 +48,11 @@ export default function Navbar() {
                             className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
                             aria-label="Toggle menu"
                         >
-                            {isOpen ? <X className="w-5 h-5 text-gray-700" /> : <Menu className="w-5 h-5 text-gray-700" />}
+                            {isOpen ? (
+                                <X className="w-5 h-5 text-gray-700" />
+                            ) : (
+                                <Menu className="w-5 h-5 text-gray-700" />
+                            )}
                         </button>
                     </div>
                 </div>

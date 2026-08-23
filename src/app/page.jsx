@@ -1,6 +1,8 @@
+import Image from 'next/image';
+import { ChevronDown, Headset } from 'lucide-react';
+import { FaBoxOpen } from 'react-icons/fa';
 import 'aos/dist/aos.css';
 import Navbar from './components/page/navbar/page';
-import HeroBanner from './components/banner/hero/page';
 import About from './components/page/about/page';
 import Produk from './components/page/produk/page';
 import Keuntungan from './components/page/keuntungan/page';
@@ -22,7 +24,57 @@ export default function Home() {
                 </header>
 
                 <section id="Beranda" className="relative min-h-screen flex items-center overflow-hidden pt-16">
-                    <HeroBanner />
+                    <Image
+                        src="/images/hero.jpg"
+                        alt="Berkah Kaca Alumunium - Distributor Bahan Bangunan"
+                        fill
+                        className="object-cover object-center"
+                        priority
+                        sizes="100vw"
+                    />
+
+                    {/* Overlay gradient biru dari kiri */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/70 to-transparent pointer-events-none" />
+
+                    {/* Content */}
+                    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+                        <div className="max-w-xl">
+                            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
+                                Berkah Kaca
+                                <br />
+                                <span className="text-blue-300">Alumunium</span>
+                            </h1>
+
+                            <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">
+                                Distributor bahan bangunan berkualitas seperti kaca, aluminium, plafon PVC, gypsum,
+                                hollow, dan berbagai kebutuhan konstruksi lainnya.
+                            </p>
+
+                            <div className="flex flex-wrap gap-4">
+                                <a
+                                    href="#produk"
+                                    className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
+                                >
+                                    <FaBoxOpen className="w-4 h-4" />
+                                    Lihat Produk
+                                </a>
+
+                                <a
+                                    href="#kontak"
+                                    className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl border border-white/30 transition-all"
+                                >
+                                    <Headset className="w-4 h-4" />
+                                    Hubungi Kami
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Scroll indicator */}
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60 bounce-slow">
+                        <span className="text-xs font-medium">Scroll Kebawah</span>
+                        <ChevronDown className="w-4 h-4" />
+                    </div>
                 </section>
 
                 <section id="Tentang" className="py-24 bg-white" data-aos="fade-up">

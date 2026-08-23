@@ -1,30 +1,24 @@
-'use client';
-
-import { useSeeAllCompanyQuery } from '@/hooks/api/companySliceAPI';
-import { useSeeAllBannerQuery } from '@/hooks/api/companySliceAPI';
 import Image from 'next/image';
-import { BoxOpen, ChevronDown, Headset } from 'lucide-react';
+import { ChevronDown, Headset } from 'lucide-react';
 import { FaBoxOpen } from 'react-icons/fa';
 
 export default function HeroBanner() {
-    const { data: response } = useSeeAllCompanyQuery();
-    const companyData = response?.data || [];
+    const namaPerusahaan = 'Berkah Kaca Alumunium';
+    const deskripsi =
+        'Distributor bahan bangunan berkualitas seperti kaca, aluminium, plafon PVC, gypsum, hollow, dan berbagai kebutuhan konstruksi lainnya.';
 
-    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
-    const deskripsi = companyData?.deskripsiPerusahaan || '-';
-
-    const namaWords = namaPerusahaan.trim().split(' ');
-    const lastWord = namaWords[namaWords.length - 1];
-    const firstWords = namaWords.slice(0, -1).join(' ');
-
-    const { data: banner } = useSeeAllBannerQuery();
-    const bannerData = banner?.data ?? [];
-
-    const image = bannerData?.bannerImageUrl;
+    const image = '/images/hero.jpg';
 
     return (
         <>
-            <Image src={image} alt="Hero Background" fill className="object-cover object-center" priority />
+            <Image
+                src={image}
+                alt="Berkah Kaca Alumunium - Distributor Bahan Bangunan"
+                fill
+                className="object-cover object-center"
+                priority
+                sizes="100vw"
+            />
 
             {/* Overlay gradient biru dari kiri */}
             <div className="absolute inset-0 bg-gradient-to-r from-blue-900/95 via-blue-800/70 to-transparent pointer-events-none" />
@@ -33,23 +27,28 @@ export default function HeroBanner() {
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                 <div className="max-w-xl">
                     <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-                        {firstWords}
+                        Berkah Kaca
                         <br />
-                        <span className="text-blue-300">{lastWord}</span>
+                        <span className="text-blue-300">Alumunium</span>
                     </h1>
+
                     <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">{deskripsi}</p>
+
                     <div className="flex flex-wrap gap-4">
                         <a
-                            href="#products"
+                            href="#produk"
                             className="inline-flex items-center gap-2 bg-blue-500 hover:bg-blue-400 text-white font-semibold px-7 py-3.5 rounded-xl shadow-md hover:shadow-lg transition-all"
                         >
-                            <FaBoxOpen className="w-4 h-4" /> Lihat Produk
+                            <FaBoxOpen className="w-4 h-4" />
+                            Lihat Produk
                         </a>
+
                         <a
-                            href="#contact"
+                            href="#kontak"
                             className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-semibold px-7 py-3.5 rounded-xl border border-white/30 transition-all"
                         >
-                            <Headset className="w-4 h-4" /> Hubungi Kami
+                            <Headset className="w-4 h-4" />
+                            Hubungi Kami
                         </a>
                     </div>
                 </div>
@@ -58,6 +57,7 @@ export default function HeroBanner() {
             {/* Scroll indicator */}
             <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-white/60 bounce-slow">
                 <span className="text-xs font-medium">Scroll Kebawah</span>
+
                 <ChevronDown className="w-4 h-4" />
             </div>
         </>
