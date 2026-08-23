@@ -52,7 +52,7 @@ export const metadata = {
         title: 'Berkah Kaca Alumunium',
         description:
             'Distributor bahan bangunan terpercaya di Tangerang - gypsum, plafon PVC, kaca, alumunium, dan aksesoris.',
-        url: 'https://www.berkahkacaalumunium.com',
+        url: 'https://kacaalumuniumberkah.com',
         siteName: 'Berkah Kaca Alumunium',
         images: [
             {
@@ -72,7 +72,7 @@ export const metadata = {
         images: ['/images/og-image.jpg'],
     },
     alternates: {
-        canonical: 'https://www.berkahkacaalumunium.com',
+        canonical: 'https://kacaalumuniumberkah.com',
     },
     icons: {
         icon: '/favicon.ico',

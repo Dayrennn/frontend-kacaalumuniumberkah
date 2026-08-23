@@ -77,10 +77,10 @@ export default function Home() {
                         '@context': 'https://schema.org',
                         '@type': 'HomeAndConstructionBusiness',
                         name: 'Berkah Kaca Alumunium',
-                        image: 'https://www.berkahkacaalumunium.com/images/og-image.jpg',
-                        url: 'https://www.berkahkacaalumunium.com',
+                        image: 'https://kacaalumuniumberkah.com/images/og-image.jpg',
+                        url: 'https://kacaalumuniumberkah.com',
                         telephone: '+62811234567',
-                        email: 'info@berkahkacaalumunium.com',
+                        email: 'kacaalumuniumberkah@gmail.com',
                         address: {
                             '@type': 'PostalAddress',
                             streetAddress: 'Caringin',
