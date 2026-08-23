@@ -11,15 +11,6 @@ import AOSProvider from './components/AOSProvider';
 import './page.css';
 
 export default function Home() {
-    useEffect(() => {
-        AOS.init({
-            duration: 700,
-            easing: 'ease-in-out',
-            once: false,
-            mirror: true,
-        });
-    }, []);
-
     return (
         <AOSProvider>
             <div className="bg-white text-gray-800 antialiased" style={{ fontFamily: "'Poppins', sans-serif" }}>
