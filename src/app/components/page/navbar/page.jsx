@@ -39,7 +39,7 @@ export default function Navbar() {
 
                     {/* Desktop Nav */}
                     <ul className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-                        {['home', 'about', 'products', 'benefit', 'address', 'contact'].map((id) => (
+                        {['Beranda', 'Tentang', 'Produk', 'Keuntungan', 'Alamat', 'Kontak'].map((id) => (
                             <li key={id}>
                                 <a href={`#${id}`} className="hover:text-blue-600 transition-colors capitalize">
                                     {id === 'about'
@@ -74,12 +74,12 @@ export default function Navbar() {
                 <div id="mobile-menu" className={isOpen ? 'open' : ''}>
                     <ul className="flex flex-col gap-1 pb-4 text-sm font-medium text-gray-700">
                         {[
-                            ['#home', 'Home'],
-                            ['#about', 'Profile'],
-                            ['#products', 'Products'],
-                            ['#benefit', 'Benefit'],
-                            ['#address', 'Address'],
-                            ['#contact', 'Contact'],
+                            ['#home', 'Beranda'],
+                            ['#about', 'Profil'],
+                            ['#products', 'Produk'],
+                            ['#benefit', 'keuntungan'],
+                            ['#address', 'Alamat'],
+                            ['#contact', 'Kontak'],
                         ].map(([href, label]) => (
                             <li key={href}>
                                 <a

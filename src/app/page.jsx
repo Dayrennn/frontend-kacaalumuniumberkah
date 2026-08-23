@@ -41,27 +41,27 @@ export default function Home() {
                     <Navbar />
                 </header>
 
-                <section id="home" className="relative min-h-screen flex items-center overflow-hidden pt-16">
+                <section id="Beranda" className="relative min-h-screen flex items-center overflow-hidden pt-16">
                     <HeroBanner />
                 </section>
 
-                <section id="about" className="py-24 bg-white" data-aos="fade-up">
+                <section id="Tentang" className="py-24 bg-white" data-aos="fade-up">
                     <About />
                 </section>
 
-                <section id="products" className="py-24 bg-gray-50" data-aos="fade-up">
+                <section id="Produk" className="py-24 bg-gray-50" data-aos="fade-up">
                     <Produk />
                 </section>
 
-                <section id="benefit" className="py-24 bg-white" data-aos="fade-up">
+                <section id="Keuntungan" className="py-24 bg-white" data-aos="fade-up">
                     <Keuntungan />
                 </section>
 
-                <section id="address" className="py-24 bg-gray-50" data-aos="fade-up">
+                <section id="Alamat" className="py-24 bg-gray-50" data-aos="fade-up">
                     <Address />
                 </section>
 
-                <section id="contact" className="py-20" data-aos="fade-up">
+                <section id="Kontak" className="py-20" data-aos="fade-up">
                     <BannerCTA />
                 </section>
 
