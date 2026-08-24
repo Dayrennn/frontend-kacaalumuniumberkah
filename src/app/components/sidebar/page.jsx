@@ -97,9 +97,9 @@ export default function Sidebar({ open = true, onClose, isAdmin: isAdminProp = f
                     </SidebarGroup>
 
                     <SidebarGroup icon={Building2} label="Company Profile" basePath="/company-profile">
-                        <SidebarSubLink href="/company-profile/banner" icon={ImageIcon}>
+                        {/* <SidebarSubLink href="/company-profile/banner" icon={ImageIcon}>
                             Banner
-                        </SidebarSubLink>
+                        </SidebarSubLink> */}
                         <SidebarSubLink href="/company-profile/produk" icon={Box}>
                             Produk
                         </SidebarSubLink>

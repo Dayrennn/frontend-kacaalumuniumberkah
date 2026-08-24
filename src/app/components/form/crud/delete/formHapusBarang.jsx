@@ -35,8 +35,8 @@ export default function FormHapusBarang({ initialData, onCancel, onSuccess }) {
                 <div className="flex items-start gap-2.5 bg-red-50 rounded-xl px-3.5 py-3">
                     <AlertTriangle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
                     <p className="text-xs text-red-700 leading-relaxed">
-                        Semua data terkait kategori ini, termasuk riwayat transaksi, akan ikut terhapus permanen dan
-                        tidak bisa dikembalikan. Apakah kamu yakin?
+                        Semua data terkait barang ini, termasuk riwayat transaksi, akan ikut terhapus permanen dan tidak
+                        bisa dikembalikan. Apakah kamu yakin?
                     </p>
                 </div>
 

@@ -159,15 +159,13 @@ export default function DataBarang() {
                                                 >
                                                     <Pencil className="w-4 h-4" />
                                                 </button>
-                                                {isOwner && (
-                                                    <button
-                                                        onClick={() => handleRemove(item)}
-                                                        title="Hapus barang"
-                                                        className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                                                    >
-                                                        <Trash2 className="w-4 h-4" />
-                                                    </button>
-                                                )}
+                                                <button
+                                                    onClick={() => handleRemove(item)}
+                                                    title="Hapus barang"
+                                                    className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                                                >
+                                                    <Trash2 className="w-4 h-4" />
+                                                </button>
                                             </div>
                                         </td>
                                     </tr>
@@ -225,7 +223,7 @@ export default function DataBarang() {
                     onClose={() => setShowModalEdit(false)}
                     formEdit={FormEditBarang}
                     initialData={selectedBarang}
-                    title="Edot Data Barang"
+                    title="Edit Data Barang"
                     successTitle="Berhasil"
                     successMessage="Data Berhasil Dirubah"
                 />
