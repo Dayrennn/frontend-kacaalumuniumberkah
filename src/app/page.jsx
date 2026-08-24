@@ -26,7 +26,7 @@ export default function Home() {
                 <section id="Beranda" className="relative min-h-screen flex items-center overflow-hidden pt-16">
                     <Image
                         src="/images/hero.jpg"
-                        alt="Kaca Alumunium Berkah - Distributor Bahan Bangunan"
+                        alt="Berkah Kaca Alumunium - Distributor Bahan Bangunan"
                         fill
                         className="object-cover object-center"
                         priority

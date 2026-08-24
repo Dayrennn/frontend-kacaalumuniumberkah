@@ -7,7 +7,7 @@ export default function Address() {
     const { data: response } = useSeeAllCompanyQuery();
     const companyData = response?.data || [];
 
-    const namaPerusahaan = companyData?.namaPerusahaan || 'Kaca Alumunium Berkah';
+    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const lokasiPerusahaan = companyData?.lokasi;
     const telephonePerusahaan = companyData?.telephone;
     const telephoneKedua = companyData?.secondTelephone;
@@ -140,7 +140,7 @@ export default function Address() {
                         style={{ minHeight: 400 }}
                     >
                         <iframe
-                            title="Kaca Alumunium Berkah Alumunium"
+                            title="Berkah Kaca Alumunium"
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.70298182421504!2d106.5844803227561!3d-6.313043738404559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69e3299b09be01%3A0xe9e34d0b8d3c324c!2sBERKAH%20KACA%20ALUMUNIUM!5e0!3m2!1sid!2sid!4v1782625370999!5m2!1sid!2sid"
                             width="100%"
                             height="100%"

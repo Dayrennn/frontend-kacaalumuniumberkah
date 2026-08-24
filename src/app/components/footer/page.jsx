@@ -10,7 +10,7 @@ export default function Footer() {
     const { data: response } = useSeeAllCompanyQuery();
     const companyData = response?.data || [];
 
-    const namaPerusahaan = companyData?.namaPerusahaan || 'Kaca Alumunium Berkah';
+    const namaPerusahaan = companyData?.namaPerusahaan || 'Berkah Kaca Alumunium';
     const lokasiPerusahaan = companyData?.lokasi;
     const telephonePerusahaan = companyData?.telephone;
     const telephoneKedua = companyData?.secondTelephone;
@@ -153,7 +153,7 @@ export default function Footer() {
 
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3 py-6 text-sm">
                     <p>
-                        © 2026 <span className="text-white font-semibold">Kaca Alumunium Berkah</span>. All rights
+                        © 2026 <span className="text-white font-semibold">Berkah Kaca Alumunium</span>. All rights
                         reserved.
                     </p>
                 </div>

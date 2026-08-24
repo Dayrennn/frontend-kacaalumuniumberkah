@@ -21,13 +21,13 @@ const poppins = Poppins({
 export const metadata = {
     metadataBase: new URL('https://kacaalumuniumberkah.com'),
     title: {
-        default: 'Kaca Alumunium Berkah | Distributor Gypsum, PVC, Kaca & Alumunium Tangerang',
-        template: '%s | Kaca Alumunium Berkah',
+        default: 'Berkah Kaca Alumunium | Distributor Gypsum, PVC, Kaca & Alumunium Tangerang',
+        template: '%s | Berkah Kaca Alumunium',
     },
     description:
-        'Kaca Alumunium Berkah adalah distributor bahan bangunan terpercaya di Caringin, Legok, Tangerang. Menyediakan gypsum board, plafon PVC, hollow steel, kaca, alumunium, dan aksesoris dengan harga bersaing serta pengiriman cepat.',
+        'Berkah Kaca Alumunium adalah distributor bahan bangunan terpercaya di Caringin, Legok, Tangerang. Menyediakan gypsum board, plafon PVC, hollow steel, kaca, alumunium, dan aksesoris dengan harga bersaing serta pengiriman cepat.',
     keywords: [
-        'Kaca Alumunium Berkah',
+        'Berkah Kaca Alumunium',
         'distributor gypsum tangerang',
         'plafon pvc tangerang',
         'kaca alumunium legok',
@@ -39,7 +39,7 @@ export const metadata = {
         'hollow',
         'ornamen',
     ],
-    authors: [{ name: 'Kaca Alumunium Berkah' }],
+    authors: [{ name: 'Berkah Kaca Alumunium' }],
     robots: {
         index: true,
         follow: true,
@@ -49,17 +49,17 @@ export const metadata = {
         },
     },
     openGraph: {
-        title: 'Kaca Alumunium Berkah',
+        title: 'Berkah Kaca Alumunium',
         description:
             'Distributor bahan bangunan terpercaya di Tangerang - gypsum, plafon PVC, kaca, alumunium, dan aksesoris.',
         url: 'https://kacaalumuniumberkah.com',
-        siteName: 'Kaca Alumunium Berkah',
+        siteName: 'Berkah Kaca Alumunium',
         images: [
             {
                 url: '/images/og-image.jpg',
                 width: 1200,
                 height: 630,
-                alt: 'Kaca Alumunium Berkah',
+                alt: 'Berkah Kaca Alumunium',
             },
         ],
         locale: 'id_ID',
@@ -67,7 +67,7 @@ export const metadata = {
     },
     twitter: {
         card: 'summary_large_image',
-        title: 'Kaca Alumunium Berkah',
+        title: 'Berkah Kaca Alumunium',
         description: 'Distributor bahan bangunan terpercaya di Tangerang.',
         images: ['/images/og-image.jpg'],
     },
