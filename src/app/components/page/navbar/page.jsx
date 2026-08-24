@@ -16,7 +16,7 @@ export default function Navbar() {
                     {/* Logo */}
                     <a href="#home" className="flex items-center gap-2 group">
                         <span className="text-xl font-extrabold text-gray-900">
-                            Kaca Alumunium <span className="text-blue-600">Berkah</span>
+                            Berkah Kaca <span className="text-blue-600">Alumunium</span>
                         </span>
                     </a>
 

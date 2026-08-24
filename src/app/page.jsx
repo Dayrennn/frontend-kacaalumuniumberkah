@@ -40,9 +40,9 @@ export default function Home() {
                     <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
                         <div className="max-w-xl">
                             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-5">
-                                Kaca Alumunium
+                                Berkah Kaca
                                 <br />
-                                <span className="text-blue-300">Berkah</span>
+                                <span className="text-blue-300">Alumunium</span>
                             </h1>
 
                             <p className="text-blue-100 text-base sm:text-lg leading-relaxed mb-8">
