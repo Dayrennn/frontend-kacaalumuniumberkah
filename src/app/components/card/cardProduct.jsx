@@ -6,8 +6,14 @@ export default function CardProduct({ name, category, bg, image, badge, badgeLab
             className="product-card bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden card-hover"
             data-category={category}
         >
-            <div className={`relative flex items-center justify-center h-40 ${bg ?? ''}`}>
-                <Image src={image} alt={name} width={120} height={120} />
+            <div className={`relative w-full h-40 ${bg ?? ''}`}>
+                <Image
+                    src={image}
+                    alt={name}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
                 <span className="absolute top-3 right-3 bg-green-100 text-green-700 text-xs font-semibold px-2 py-1 rounded-full flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Available
                 </span>
