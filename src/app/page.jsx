@@ -11,6 +11,7 @@ import BannerCTA from './components/banner/bannerCTA/page';
 import Footer from './components/footer/page';
 import AOSProvider from './components/AOSProvider';
 import './page.css';
+import Proyek from './components/page/proyek/page';
 
 export default function Home() {
     return (
@@ -81,6 +82,10 @@ export default function Home() {
                     <About />
                 </section>
 
+                <section id="Proyek" className="py-24 bg-white" data-aos="fade-up">
+                    <Proyek />
+                </section>
+
                 <section id="Produk" className="py-24 bg-gray-50" data-aos="fade-up">
                     <Produk />
                 </section>
@@ -136,7 +141,7 @@ export default function Home() {
                                 '@type': 'OpeningHoursSpecification',
                                 dayOfWeek: ['Saturday', 'Sunday'],
                                 opens: '08:00',
-                                closes: '15:00',
+                                closes: '17:00',
                             },
                         ],
                         priceRange: '$$',

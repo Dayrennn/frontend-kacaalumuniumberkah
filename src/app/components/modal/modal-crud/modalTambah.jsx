@@ -1,17 +1,10 @@
-'use client';
+"use client";
 
-import { Tags, X } from 'lucide-react';
-import ModalSukses from '../successModal';
-import { useState } from 'react';
+import { Tags, X } from "lucide-react";
+import ModalSukses from "../successModal";
+import { useState } from "react";
 
-export default function ModalTambah({
-    onClose,
-    formTambah: FormTambahKategori,
-    successTitle,
-    successMessage,
-    title,
-    ...formProps
-}) {
+export default function ModalTambah({ onClose, formTambah: FormTambahKategori, successTitle, successMessage, title, ...formProps }) {
     const [showSuccess, setShowSuccess] = useState(false);
 
     const handleAfterSuccess = () => {
@@ -27,9 +20,9 @@ export default function ModalTambah({
             <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" onClick={onClose} />
 
             {/* Modal card */}
-            <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 w-full max-w-md overflow-hidden animate-in fade-in zoom-in-95 duration-150">
+            <div className="relative bg-white rounded-2xl shadow-lg border border-gray-100 w-full max-w-md max-h-[90dvh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-150">
                 {/* Header */}
-                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
                     <div className="flex items-center gap-2">
                         <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center">
                             <Tags className="w-4 h-4 text-blue-600" />
@@ -45,7 +38,9 @@ export default function ModalTambah({
                 </div>
 
                 {/* Body */}
-                <FormTambahKategori onSuccess={handleAfterSuccess} onCancel={onClose} {...formProps} />
+                <div className="flex-1 overflow-y-auto">
+                    <FormTambahKategori onSuccess={handleAfterSuccess} onCancel={onClose} {...formProps} />
+                </div>
             </div>
         </div>
     );

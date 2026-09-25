@@ -1,13 +1,14 @@
-import { configureStore } from '@reduxjs/toolkit';
-import authReducer from '@/hooks/api/authSliceAPI';
-import { userAPI } from '@/hooks/api/userSliceAPI';
-import { kategoriAPI } from '@/hooks/api/kategoriSliceAPI';
-import { barangAPI } from '@/hooks/api/barangSliceAPI';
-import { mutasiAPI } from '@/hooks/api/mutasiSliceAPI';
-import { adsAPI } from '@/hooks/api/produkAdsSliceAPI';
-import { laporanAPI } from '@/hooks/api/laporanSliceAPI';
-import { companyAPI } from '@/hooks/api/companySliceAPI';
-import { dashboardAPI } from '@/hooks/api/dashboardSliceAPI';
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "@/hooks/api/authSliceAPI";
+import { userAPI } from "@/hooks/api/userSliceAPI";
+import { kategoriAPI } from "@/hooks/api/kategoriSliceAPI";
+import { barangAPI } from "@/hooks/api/barangSliceAPI";
+import { mutasiAPI } from "@/hooks/api/mutasiSliceAPI";
+import { adsAPI } from "@/hooks/api/produkAdsSliceAPI";
+import { laporanAPI } from "@/hooks/api/laporanSliceAPI";
+import { companyAPI } from "@/hooks/api/companySliceAPI";
+import { dashboardAPI } from "@/hooks/api/dashboardSliceAPI";
+import { projectApi } from "@/hooks/api/projectSliceAPI";
 
 export const store = configureStore({
     reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
         [laporanAPI.reducerPath]: laporanAPI.reducer,
         [companyAPI.reducerPath]: companyAPI.reducer,
         [dashboardAPI.reducerPath]: dashboardAPI.reducer,
+        [projectApi.reducerPath]: projectApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()
@@ -30,5 +32,6 @@ export const store = configureStore({
             .concat(adsAPI.middleware)
             .concat(laporanAPI.middleware)
             .concat(companyAPI.middleware)
-            .concat(dashboardAPI.middleware),
+            .concat(dashboardAPI.middleware)
+            .concat(projectApi.middleware),
 });

@@ -15,6 +15,7 @@ import {
     Building2,
     Users,
     LogOut,
+    Table,
 } from 'lucide-react';
 import { useLogoutMutation, useGetMeQuery } from '@/hooks/api/userSliceAPI';
 import { useRouter } from 'next/navigation';
@@ -105,6 +106,9 @@ export default function Sidebar({ open = true, onClose, isAdmin: isAdminProp = f
                         </SidebarSubLink>
                         <SidebarSubLink href="/company-profile/profile-perusahaan" icon={Building2}>
                             Profil Perusahaan
+                        </SidebarSubLink>
+                        <SidebarSubLink href="/company-profile/project" icon={Table}>
+                            Kelola Project
                         </SidebarSubLink>
                     </SidebarGroup>
                     {isOwner && (

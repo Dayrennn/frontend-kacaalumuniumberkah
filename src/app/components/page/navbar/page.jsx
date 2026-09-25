@@ -22,7 +22,7 @@ export default function Navbar() {
 
                     {/* Desktop Nav */}
                     <ul className="hidden md:flex items-center gap-7 text-sm font-medium text-gray-600">
-                        {['Beranda', 'Tentang', 'Produk', 'Keuntungan', 'Alamat', 'Kontak'].map((id) => (
+                        {['Beranda', 'Tentang', 'Produk', 'Keuntungan', 'Alamat', 'Kontak', 'Proyek'].map((id) => (
                             <li key={id}>
                                 <a href={`#${id}`} className="hover:text-blue-600 transition-colors capitalize">
                                     {id === 'about'
@@ -67,6 +67,7 @@ export default function Navbar() {
                             ['#benefit', 'keuntungan'],
                             ['#address', 'Alamat'],
                             ['#contact', 'Kontak'],
+                            ['#proyek', 'Proyek']
                         ].map(([href, label]) => (
                             <li key={href}>
                                 <a
